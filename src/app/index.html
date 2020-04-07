@@ -13,7 +13,6 @@
   </head>
   <body>
 
-
     <!-- Optional JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js%22%3E"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -22,17 +21,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script>
-    fetch("./templates/header.html")
-  .then(response => {
-    return response.text()
-  })
-  .then(data => {
-    document.querySelector("header").innerHTML = data;
-  });
-  </script>
-
-    <include src="templates/header.html"></include>
+        $( document ).ready(function() {
+          $("#header").load("./templates/header.html");
+          });
+    </script>
+  <div id="header">Hello coomerz</div>
   </body>
-  <header></header>
+
+
 
 </html>
