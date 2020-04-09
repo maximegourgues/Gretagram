@@ -11,7 +11,7 @@
   height: 100%;
   transition: all .5s ease;
 }
-.sidebar header{
+.sidebar div{
   font-size: 28px;
   color: white;
   line-height: 70px;
