@@ -1,134 +1,83 @@
-/* The side navigation menu */
-.sidebar {
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap');
+*{
   margin: 0;
   padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-/* Sidebar links */
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
   text-decoration: none;
 }
-
-/* Active/current link */
-.sidebar a.active {
-  background-color: #4CAF50;
+.sidebar{
+  position: fixed;
+  width: 240px;
+  left: 140px;
+  height: 100%;
+  transition: all .5s ease;
+}
+.sidebar header{
+  font-size: 28px;
   color: white;
-}
+  line-height: 70px;
+  text-align: center;
+  user-select: none;
+  font-family: 'Noto Sans', sans-serif;
 
-/* Links on mouse-over */
-.sidebar a:hover:not(.active) {
-  background-color: #555;
+}
+.sidebar a{
+  font-size: 20px;
+  display: block;
+  height: 65px;
+  width: 100%;
   color: white;
+  line-height: 65px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-bottom: 1px transparent;
+  border-top: 1px solid transparent;
+  border-left: 5px solid transparent;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+  transition: all .5s ease;
+}
+.sidebar a:hover{
+  border-left: 10px solid transparent;
+  text-decoration: none;
+  color: #17BF63;
+}
+.sidebar a i{
+  font-size: 23px;
+  margin-right: 16px;
+}
+.sidebar a span{
+  letter-spacing: 1px;
 }
 
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
+@media(max-width : 860px){
+  .sidebar{
     height: auto;
-    position: relative;
+    width: 70px;
+    left: 0;
+    margin: auto 0;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
+  header,#btn,#cancel{
+    display: none;
+  }
+  span{
+    position: absolute;
+    margin-left: 23px;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .sidebar a{
+    height: 60px;
+  }
+  .sidebar a i{
+    margin-left: -10px;
+  }
+  a:hover {
+    width: 200px;
+    background: inherit;
+  }
+  .sidebar a:hover span{
+    opacity: 0;
+    visibility: hidden;
   }
 }
-/*
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-}
-
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
-}
-
-a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-#sidebar {
-    /* don't forget to add all the previously mentioned styles here too
-    background: #7386D5;
-    color: #fff;
-    transition: all 0.3s;
-}
-
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
-}
-
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
-
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-}
-#sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
-}
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
-}
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
-}
-.wrapper {
-    display: flex;
-    align-items: stretch;
-}
-
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-}
-
-#sidebar.active {
-    margin-left: -250px;
-}
-*/
+/* Don't Forget to Subscribe our Channel[CodingNepal] */
