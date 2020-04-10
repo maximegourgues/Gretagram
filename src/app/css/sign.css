@@ -11,6 +11,20 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
+  font-family: 'Noto Sans', sans-serif;
+}
+.modal{
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top:0;
+}
+.card{
+    border-radius: 20px;
+}
+.card-title{
+font-weight: bold;
 }
 
 .form-signin {

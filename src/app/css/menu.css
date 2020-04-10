@@ -53,6 +53,22 @@
   letter-spacing: 1px;
 }
 
+.sidebar header{
+  user-select: none;
+  padding-left: 30px;
+  display: block;
+  height: 65px;
+  width: 100%;
+  line-height: 65px;
+  box-sizing: border-box;
+  border-bottom: 1px transparent;
+  border-top: 1px solid transparent;
+  border-left: 5px solid transparent;
+}
+.sidebar header i {
+  margin-right: 16px;
+
+}
 @media(max-width : 860px){
   .sidebar{
     height: auto;
@@ -72,7 +88,7 @@
   .sidebar a{
     height: 60px;
   }
-  .sidebar a i{
+  .sidebar i{
     margin-left: -10px;
   }
   a:hover {
