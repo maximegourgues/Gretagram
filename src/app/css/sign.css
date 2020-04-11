@@ -1,5 +1,4 @@
-html,
-body {
+html,body {
   height: 100%;
 }
 
@@ -17,15 +16,35 @@ body {
   position: absolute;
   justify-content: center;
   align-items: center;
-  display: flex;
+  display: none;
   top:0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: visibility 0s, opacity 0.7s;
+  display: flex;
+}
+.modal-active{
+  visibility: visible;
+  opacity: 1;
+
+}
+.close{
+
+  cursor: pointer;
+  font-size: 30px;
+
 }
 .card{
     border-radius: 20px;
+    width: 600px;
+    height: auto;
+
 }
 .card-title{
 font-weight: bold;
 }
+
 
 .form-signin {
   width: 100%;
@@ -36,7 +55,7 @@ font-weight: bold;
 
 .form-label-group {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-label-group > input,
