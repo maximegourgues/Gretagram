@@ -13,17 +13,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" crossorigin="anonymous"></script>
     <ng-include src="'scripts/headscripts.html'"></ng-include>
 
-
+    <link href="css/index.css" rel="stylesheet">
   </head>
 
   <!-- 152630 -->
   <body ng-app="" style="color: white; background-color: rgb(21, 32, 43); overflow-y: scroll;">
 
-    <header ng-include src="'templates/menu.html'"></header>
+    <div class="container-fluid">
+
+        <header ng-include src="'templates/menu.html'"></header>
+        <main>
+          <form class="form-signin">
+            <div class="text-center mb-4">
+              <img class="mb-4 rounded-circle" src="../assets/img/logo/homeicon.jpg" alt="" width="90" height="90">
+              <h1 class="h3 mb-3 font-weight-bold">Log in to Gretagram</h1>
+              <p class="text-center">When you start to act, <l class="text-success">hope</l> is everywhere.</p>
+            </div>
+
+            <div class="form-label-group">
+              <input type="text" id="inputText" class="form-control" placeholder="User name" required autofocus>
+              <label for="inputUsername">User name</label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <label for="inputPassword">Password</label>
+            </div>
+
+            <div class="custom-control custom-checkbox mb-4">
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Remeber me</label>
+            </div>
+            <button class="btn btn-lg btn-info btn-block rounded-pill" type="submit">Log in</button>
+            <p class="mt-4 mb-3 text-decoration-none text-center"><a href="#" id="inscription">Join us</a></p>
+
+        </form></main>
+
+    </div>
+
+
+
 
     <!-- <div ng-include src="'templates/menu.html'" ></div> -->
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
+
 
 
   </body>
