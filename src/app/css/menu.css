@@ -5,7 +5,7 @@
   text-decoration: none;
 }
 .sidebar{
-  position: fixed;
+  z-index: 3;
   width: 240px;
   left: 140px;
   height: 100%;
