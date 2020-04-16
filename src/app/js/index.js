@@ -26,6 +26,9 @@ L.control.search({
 }).addTo(map);
 
 
+leafMarkers = new L.LayerGroup();
+map.addLayer(leafMarkers);
+
 //GEOLOCATION
 
 function onLocationFound(e) {
@@ -49,6 +52,9 @@ function getLocationLeaflet() {
 
 //MARKERS
 
+var tabID = [];
+var tabMarkers = [];
+
 map.on('click', placerMarqueur);
 
 function placerMarqueur(e) {
@@ -57,15 +63,72 @@ function placerMarqueur(e) {
   console.log(lati);
   console.log(longi);
   var marker = L.marker([lati,longi]);
-  marker.addTo(map);
-  marker.bindPopup();
-  // Faire quelque chose suite à l’événement
   
+
+  //SET ID
+  var i = getNewIndex();
+  marker.id=i;
+  tabID.push(marker.id);
+  console.log("id: "+marker.id);
+  marker.bindPopup("<h3>"+marker.id+"</br><input type='button' value='Delete' onclick='deleteMarker("+marker.id+")'>");
+
+  //AJOUT DU MARQUEUR DANS LE TABLEAU
+  tabMarkers.push(marker);
+
+  marker.addTo(leafMarkers);
+
+  // Faire quelque chose suite à l’événement
+  //marker.on('click',console.log(e));
+  console.log("tabID: "+tabID);
+  console.log("tabMarkers: "+tabMarkers);
+  console.log("Marker:"+marker);
+  console.log("find:"+(findMarkerInArrayByID(marker.id)));
+}
+
+function mouseDown(e) {
+  e = e || window.event;
+  if ( !e.which && e.button !== undefined ) {
+    e.which = ( e.button & 1 ? 1 : ( e.button & 2 ? 3 : ( e.button & 4 ? 2 : 0 ) ) );
+  }
+  switch (e.which) {
+    case 1: alert('left'); break;
+    case 2: alert('middle'); break;
+    case 3: alert('right'); break; 
+  }
+}
+
+function getNewIndex(){
+  var i=getRandomInt();
+  if(!(tabID.includes(i))){
+    return i;
+  }else{
+  return getNewIndex();
+  }
+}
+
+function getRandomInt() {
+  return Math.floor(Math.random() * Math.floor(1000));
+}
+
+function deleteMarker(m){
+  console.log("Remove marker: "+m);
+  var lay = findMarkerInArrayByID(m.id);
+  leafMarkers.removeLayer(lay);
+}
+
+function findMarkerInArrayByID(ID){
+  /*for(int i=0;i<=tabMarkers.length;i++){
+    if(tabMarkers.get)
+  }*/
+  var found = tabMarkers.find(function(element) { 
+    return element.id=ID; 
+  }); 
+  return found;
 }
 
 console.log(markers);
 //console.log(markers.length);
-function loadMarkers(){
+/*function loadMarkers(){
   n=markers.length;
   console.log(n);
   for(i=0 ; i<n ; i++){
@@ -73,5 +136,5 @@ function loadMarkers(){
     console.log(link);
   }
   
-}
+}*/
 
