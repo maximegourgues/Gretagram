@@ -16,6 +16,60 @@
     <ng-include src="'scripts/headscripts.html'"></ng-include>
 
     <link href="css/index.css" rel="stylesheet">
+
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+     <script type="text/javascript">
+
+         $(document).ready(function() {
+
+           //votre code ici
+           /*
+             L'utilisateur entre des phrases qui sont publiées
+             dans la fenêtre du chat.
+
+             Au clic sur une phrase, celle-ci est supprimée.
+           */
+
+           function clear(){
+             $("form input[name='phrase']").val('');
+           }
+
+           $("#post").click(function(){
+             console.log("div cliquée");
+             $("this").text("");
+
+           });
+
+           $("form").submit(function(event){
+             event.preventDefault();
+             var message = $("form input[name='phrase']")[0].value;
+
+             $("#content").prepend("<div id='post'>"+message+'</div>');
+             clear();
+
+             $("#post").click(function(event){
+               console.log("div cliquée");
+               this.remove();
+
+             });
+
+           });
+
+         });
+
+       </script>
+     <style>
+         #content {
+           width : 300px;
+           height: 200px;
+           border:1px dotted black;
+         }
+         .ligne {
+           display:block;
+         }
+
+       </style>
   </head>
 
   <!-- 152630 -->
@@ -27,16 +81,17 @@
           <header ng-include src="'templates/menu.html'"></header>
         </div>
 
-        <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content" role="main">
-          <div class="col-12 col-md-7 col-xl-8 py-md-3 bd-content">
-              <div class="text-center mb-4">
-              <div class="form-label-group">
-                <input type="text" id="inputText" class="form-control" placeholder="What's up ?" required autofocus>
-
-              </div>
+        <main class="col-12 col-md-7 col-xl-5 py-md-3 bd-content" role="main">
+          <div class=" col-md-auto col-xl-auto py-md-3">
+              <div class="row justify-content-center ">
+              <form class="form-label-group" id="chat">
+                <input type="text" name="phrase" id="inputText" class="form-control" placeholder="What's up ?" required autofocus>
+                <input type="submit" value="Envoyer">
+              </form>
           </div>
         </div>
-
+        <div id="content">
+        </div>
   </main>
   <div class="d-none d-xl-block col-xl-1 bd-toc">
     texte
