@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <!--title-->
+    <title>Gretagram</title>
+    <!-- Required meta tags -->
+
+
+    <!-- Sidebar Head -->
+    <link rel="stylesheet" href="css/menu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" crossorigin="anonymous"></script>
+    <ng-include src="'scripts/headscripts.html'"></ng-include>
+
+    <link href="css/index.css" rel="stylesheet">
+
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+     <script type="text/javascript">
+
+         $(document).ready(function() {
+
+           //votre code ici
+           /*
+             L'utilisateur entre des phrases qui sont publiées
+             dans la fenêtre du chat.
+
+             Au clic sur une phrase, celle-ci est supprimée.
+           */
+
+           function clear(){
+             $("form input[name='phrase']").val('');
+           }
+
+           $("#post").click(function(){
+             console.log("div cliquée");
+             $("this").text("");
+
+           });
+
+           $("form").submit(function(event){
+             event.preventDefault();
+             var message = $("form input[name='phrase']")[0].value;
+
+             $("#content").prepend("<div id='post'>"+message+'</div>');
+             clear();
+
+             $("#post").click(function(event){
+               console.log("div cliquée");
+               this.remove();
+
+             });
+
+           });
+
+         });
+
+       </script>
+     <style>
+         #content {
+           width : 300px;
+           height: 200px;
+           border:1px dotted black;
+         }
+         .ligne {
+           display:block;
+         }
+
+       </style>
+  </head>
+
+  <!-- 152630 -->
+  <body ng-app="" style="color: white; background-color: rgb(21, 32, 43); overflow-y: scroll;">
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-3 bd-sidebar">
+          <header ng-include src="'templates/menu.html'"></header>
+        </div>
+        <main class="col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div class="row justify-content-center ">
+              <form class="form-label-group" id="chat">
+                <input type="text" name="phrase" id="inputText" class="form-control" placeholder="What's up ?" required autofocus>
+                <input type="submit" value="Envoyer">
+              </form>
+          </div>
+
+        <div id="content">
+        </div>
+  </main>
+  <nav class="d-none d-xl-block col-xl-1 bd-toc">
+    texte
+  </nav>
+
+</div>
+</div>
+
+    <!-- <div ng-include src="'templates/menu.html'" ></div> -->
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+  </body>
+
+</html>
