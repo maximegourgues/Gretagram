@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="style.css" />
 
 
-    <link href="css/index.scss" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -67,53 +67,46 @@
          });
 
        </script>
-     <style>
-         #content {
-           width : 300px;
-           height: 200px;
-           border:1px dotted black;
-         }
-         .ligne {
-           display:block;
-         }
 
-       </style>
   </head>
 
   <!-- 152630 -->
   <body ng-app="" style="color: white; background-color: rgb(21, 32, 43); overflow-y: scroll;">
-
-    <div class="container-fluid">
+<div class="container-fluid">
+    <div class="container">
       <div class="row flex-xl-nowrap">
-        <div class="col-12 col-md-3 col-xl-3 bd-sidebar">
+        <div class="col-12 col-md-3 col-xl-4 bd-sidebar">
           <header ng-include src="'templates/menu.html'"></header>
         </div>
-
-        <main class="col-12 col-md-7 col-xl-5 py-md-3 bd-content" role="main">
+        <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content" role="main">
           <div class=" col-md-auto col-xl-auto py-md-3">
               <div class="row justify-content-center ">
               <form class="form-label-group" id="chat">
                 <input type="text" name="phrase" id="inputText" class="form-control" placeholder="What's up ?" required autofocus>
                 <input type="submit" value="Envoyer">
               </form>
-          </div>
+              </div>
+              <div class="" id="content">
+              </div>
         </div>
-        <div id="content">
-        </div>
-  </main>
-  <div class="d-none d-xl-block col-xl-4 bd-toc">
-    <div id="map">
+        </main>
+
+
+      </div>
 
     </div>
 
-		<script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
-		<script src="leaflet-search.js"></script>
-    <script src="map.js"></script>
+</div>
+<div class="d-none d-xl-block col-xl-4 bd-toc">
+  <div id="map">
 
   </div>
-</div>
-</div>
 
+  <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+  <script src="leaflet-search.js"></script>
+  <script src="map.js"></script>
+
+</div>
     <!-- <div ng-include src="'templates/menu.html'" ></div> -->
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
