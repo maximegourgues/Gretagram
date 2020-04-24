@@ -1,0 +1,50 @@
+ {
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "timestamp": "2015-08-08T19:03:02Z",
+  "features": [
+    {
+      "type":"Feature",
+      "properties":{
+        "name":"Paris",
+        "city":"Paris"
+      },
+      "geometry":{
+        "type": "Point",
+        "coordinates": [
+          2.3522219,
+          48.856614
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "name":"Marseille",
+        "city":"Marseille"
+      },
+      "geometry":{
+        "type": "Point",
+        "coordinates": [
+          5.400000,
+          43.300000
+        ]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties":{
+        "name":"Nice",
+        "city":"Nice"
+      },
+      "geometry":{
+        "type": "Point",
+        "coordinates": [
+          7.2619532,
+          43.7101728
+        ]
+      }
+    }
+
+  ]
+}
