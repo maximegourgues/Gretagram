@@ -255,8 +255,6 @@ var geojsonLayer;
 	}) );
 
 
-	
-
 
 //Reduce/Extend Button
 
@@ -265,60 +263,46 @@ var geojsonLayer;
 
 	//container.classList.add("{transition-duration='0.5s'}");
 
-	console.log(container.classList);
+	//console.log(container.classList);
 	//console.log(changeButton);
 	var bigMap = true;
 
 	changeButton.addEventListener('click',updateButton);
 	
 	//console.log("zoom: "+map.getZoom());
-	
+
+    map.invalidateSize({pan: false});
 	function updateButton(){
 
-			console.log(map.getCenter());
+			//console.log(map.getCenter());
 			var currentPos = map.getCenter();
-			var currentZoom = map.getZoom();
+            var currentZoom = map.getZoom();
+            console.log(currentPos);
 
+            var filActu = $('modifmain');
+            console.log("modif:main=>");
+            console.log(filActu);
 
 			if(bigMap){
 				
 				changeButton.value='Extend';
-				bigMap=false;
+                
+                container.classList.remove('three');
+                container.classList.add('three-trans');
+                map.setView(currentPos);
 
-				container.style.width='400px';
-				container.style.height='400px';
-
-				map.setView(currentPos);
-
-				appendTendances();
 			}
 			else{
 				changeButton.value='Reduce';
-				bigMap=true;
-				
-				container.style.width='1000px';
-				container.style.height='800px';
-				
-				map.setView(currentPos);
+                
+                container.classList.remove('three-trans');
+                container.classList.add('three');
+                map.setView(currentPos);
+                
+            }
 
-				removeTendances();
-			}
-	
+            bigMap=!bigMap;
 
 	}
 
-	//TENDANCES
 
-	var node = document.createElement("DIV"); 
-	var titre = document.createElement("h3"); 
-	var titretext = document.createTextNode("tendances");
-	titre.appendChild(titretext);
-	node.appendChild(titre); 
-
-	function appendTendances(){
-		container.appendChild(node);
-	}
-
-	function removeTendances(){
-		container.removeChild(node);
-	}

@@ -1,26 +1,145 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Leaflet Map</title>
+       <!--title-->
+        <title>Gretagram</title>
+        <!-- Required meta tags -->
+
+
+        <!-- Sidebar Head -->
+        <link rel="stylesheet" href="css/menu.css">
+        <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <!-- Angular JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" crossorigin="anonymous"></script>
+        <ng-include src="'scripts/headscripts.html'"></ng-include>
+
+        <!--leaflet-->
         <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <meta http-equiv='content-type' content='text/html; charset=utf-8' />
-        <meta name='viewport' content='width=device-width,initial-scale=1.0 maximum-scale=1.0'>
-        <style type="text/css">
-        	html, body, #map { height: 90%; width: 100%; margin: 0; padding: 0; }
+            <link rel="stylesheet" href="leaflet-search.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+        <link href="css/index.css" rel="stylesheet">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                //votre code ici
+                /*
+                L'utilisateur entre des phrases qui sont publiées
+                dans la fenêtre du chat.
+
+                Au clic sur une phrase, celle-ci est supprimée.
+                */
+
+                function clear(){
+                    $("form input[name='phrase']").val('');
+                }
+
+                $("#post").click(function(){
+                    console.log("div cliquée");
+                    $("this").text("");
+
+                });
+
+                $("form").submit(function(event){
+                    event.preventDefault();
+                    var message = $("form input[name='phrase']")[0].value;
+
+                    $("#content").prepend("<div id='post'>"+message+'</div>');
+                    clear();
+
+                    $("#post").click(function(event){
+                      console.log("div cliquée");
+                     this.remove();
+
+                    });
+
+                });
+
+            });
+
+        </script>
+
+       <style type="text/css">
+
+            .leaflet-popup-content{
+                color:black;
+            }
+
+            div{   
+                position:relative;
+                height:100%;
+                width:100%;
+                
+            }
+            #main{
+                display:flex;
+            }
+            .one {
+                border:solid 1px;
+                height:100px;
+                width:500px;
+                padding:30px;
+                margin:50px;
+            }
+
+            .two {
+                border:solid 1px;
+                height:100px;
+                width:2000px;
+                padding:30px;
+                margin:50px;
+            }
+
+            .two-trans {
+                border:solid 1px;
+                height:100px;
+                width:2000px;
+                padding:30px;
+                margin:50px;
+            }
+
+            .three {
+                height: 800px; 
+                width: 1700px;
+                padding:30px;
+                margin:20px;
+                transition-duration:0.5s;
+            }
+
+            .three-trans {
+                height: 400px; 
+                width: 800px;
+                padding:30px;
+                margin:20px;
+                transition-duration:0.5s;
+            }
         </style>
+
+        
+		
     </head>
     <body>
-      <div id="map"></div>
-      <input type="button" value="Locate me!" onClick="javascript:getLocationLeaflet();">
-		<script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
-		<script src="leaflet-search.js"></script>
-		<script src="export82.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
-		<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
-		<script src="https://rawgit.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
-		<script src='js/controls/search.js'></script>
-		<script src='js/index.js'></script>
+        <div id='main'>
+            <div class='one'></div>
+            <div class='two'></div>
+            <div class='three' id='map-container'>
+                <div id="map"></div>
+                <input id='size' type="button" value="Locate me!" onClick="javascript:getLocationLeaflet();">
+                
+                <script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+                
+                <link rel="stylesheet" href="leaflet-search.css" />
+                <link rel="stylesheet" href="style.css" />
+                
+                <script src="leaflet-search.js"></script>
+                <script src='map2.js'></script>
+            </div>
+        </div>
 	</body>
 
 </html>
