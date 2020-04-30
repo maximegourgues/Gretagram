@@ -138,6 +138,15 @@
         div{
             color:black;
         }
+        #preview-image{
+            height:100px;
+        }
+        .obj{
+            display: inline-block;
+            max-height:95px;
+            width: auto;
+            height: auto;
+        }
         
     </style>
   </head>
@@ -155,20 +164,25 @@
               <div class=" col-md-auto col-xl-auto py-md-3">
                     <div class="row justify-content-center ">
                         <form class="form-label-group" id="new-post" autocomplete="off" action="/action_page.php">
-                            
+                            <!--DESCRIPTION CONTAINER-->
                             <div>
                                 <textarea id="text-status" rows="7" cols="60" placeholder="Remplissez votre nouveau post ici"></textarea>
                             </div>
-
+                            <!--UPLOAD FILE CONTAINER-->
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <label class="custom-file-label" for="fileElem">Select some files</label>
                             </div>
+                            <!--SEARCH CONTAINER-->
                             <div class="my-search">
                                 <div class="autocomplete" style="width:300px;">
                                     <input id="myInput" type="text" name="myCountry" placeholder="Emplacement">
                                 </div>
                                 <input type="submit">
+                            </div>
+                            <!--PREVIEW CONTAINER-->
+                            <div id="preview-image">
+
                             </div>
                         </form>
                     </div>
@@ -185,7 +199,6 @@
         <div id='map-container' class='three'>
             
             <div id="map" ></div>
-            <input type='button' id='size' value='Reduce'>
 
             <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
             <script src="leaflet-search.js"></script>
@@ -195,7 +208,7 @@
     </div>
     <script>
         autocomplete(document.getElementById("myInput"));
-        </script> 
+    </script> 
   </body>
 
 </html>

@@ -102,6 +102,18 @@ function removeMarkers(){
 	  };
 }
 
+function updateImputPosition(lat,lon){
+	var coords = [lat,lon];
+	var name = prompt("Veuillez nommer votre marqueur");
+	//console.log(name);
+	while(name.length<4){
+		var name = prompt("Merci de lui donner un nom");
+		$('#myInput').value=name;
+		$('#myInput').data('coords',c);
+		console.log($('#myInput').data('coords'));
+	}
+}
+
   map.on('click',function(e){
 
 		lat = e.latlng.lat;
@@ -110,7 +122,10 @@ function removeMarkers(){
 	console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
 		//Clear existing marker, circle, and selected points if selecting new points
 		removeMarkers();
-		
+		//console.log(e.target.classList);
+		//if(e.target.childNodes.length>0 && !(e.target.lastChild.classList.contains('clickable-item'))){
+		updateImputPosition(lat,lon);
+		//}
 	//Add a marker to show where you clicked.
 	   //Note: if lat/lon are strings then use parseFloat(lat), parseFloat(lon)
 	SelectPoints(lat,lon);
@@ -121,6 +136,7 @@ function removeMarkers(){
 	dist = 15;  // 150 miles,
 
 	function SelectPoints(lat,lon){
+		
 		removeMarkers();
 		theMarker = L.marker([lat,lon]).addTo(map);
 		xy = [lat,lon];  //center point of circle
@@ -363,7 +379,32 @@ function clickedItem(element){
 		var b = coords[1];
 		SelectPoints(a,b);
 		map.setView([a,b]);
+		var c = [a,b];
+		$('#myInput').data('coords',c);
+		console.log($('#myInput').data('coords'));
 	}
 }
 
-	 
+//MINIATURE DE L'IMAGE
+function handleFiles(files) {
+	for (var i = 0; i < files.length; i++) {
+	  var file = files[i];
+	  var imageType = /^image\//;
+  
+	  if (!imageType.test(file.type)) {
+		continue;
+	  }
+  
+	  var img = document.createElement("img");
+	  img.classList.add("obj");
+	  img.file = file;
+	  var preview = document.getElementById('preview-image');
+	  preview.appendChild(img); // En admettant que "preview" est l'élément div qui contiendra le contenu affiché. 
+  
+	  var reader = new FileReader();
+	  reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+	  reader.readAsDataURL(file);
+	}
+  }
+  
+
