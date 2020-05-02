@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,13 +22,34 @@
 
   <!-- Custom styles for this template -->
   <link href="css/sign.css" rel="stylesheet">
+
+        <script type="text/javascript" >
+          $(document).ready(function() {
+            $("#signsub").on('click', function (){
+              var id = $("#inputId").val();
+              var name = $("#inputName").val();
+              var password = $("#inputPassword").val();
+            });
+              $.ajax({
+                  type: "POST"
+                  url: 'php/register.php',
+                  data: {
+                    id: id,
+                    name: name,
+                    password: password
+                  }
+                });
+          window.location.replace('index2.html');
+          });
+      </script>
+
   </head>
   <!-- sign-in form style -->
   <body>
 
     <form class="form-signin">
       <div class="text-center mb-4">
-        <img class="mb-4 rounded-circle" src="../assets/img/logo/homeicon.jpg" alt="" width="90" height="90">
+        <img class="mb-4 rounded-circle" src="assets/img/logo/homeicon.jpg" alt="" width="90" height="90">
         <h1 class="h3 mb-3 font-weight-bold">Log in to Gretagram</h1>
         <p class="text-center">When you start to act, <l class="text-success">hope</l> is everywhere.</p>
       </div>
@@ -55,43 +77,39 @@
       <div class="card text-center">
         <div class="card-header bg-transparent ">
           <div class="close">×</div>
-          <img height="45" src="../assets/img/logo/earthPin.png">
+          <img height="45" src="assets/img/logo/earthPin.png">
         </div>
         <div class="card-body m-4">
           <h5 class="card-title">Create your account </h5>
-            <form class="form-signin text-left p-5 ">
+
+            <form class="form-signin text-left p-5 " id="signupForm">
 
             <div class="form-label-group">
-              <input type="text" class="form-control" id="inputText" placeholder=" " required>
-              <label for="inputText">Name</label>
+              <input type="text" class="form-control" id="inputId" placeholder=" " required>
+              <label for="inputText">Account Name</label>
             </div>
 
             <div class="form-label-group">
-              <input type="text" class="form-control" id="inputText" placeholder=" " required>
+              <input type="text" class="form-control" id="inputName" placeholder=" " required>
 
               <label for="inputText">Username</label>
             </div>
 
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder=" " required>
+              <input type="password" id="inputPassword" class="form-control" placeholder="" required>
               <label for="inputPassword">Password</label>
             </div>
 
+          <div class="row justify-content-center p-4  m-3">
+            <input type="button" id="signsub" value="Sign-up" class="btn rounded-pill btn-info">
+          </div>
           </form>
-          <a href="#" class="btn rounded-pill btn-info">Sign up</a>
         </div>
       </div>
     </div>
 
-    <script type="text/javascript">
-    var modal = document.querySelector('.modal');
-
-      document.getElementById('inscription').addEventListener('click', function() {
-        modal.classList.add('modal-active');
-      });
-      document.querySelector('.close').addEventListener('click', function() {
-        modal.classList.remove('modal-active');
-      });
-    </script>
   </body>
+  <script type="text/javascript" src='js/sign.js'></script>
+
+
 </html>
