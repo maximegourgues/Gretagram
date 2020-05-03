@@ -23,25 +23,6 @@
   <!-- Custom styles for this template -->
   <link href="css/sign.css" rel="stylesheet">
 
-        <script type="text/javascript" >
-          $(document).ready(function() {
-            $("#signsub").on('click', function (){
-              var id = $("#inputId").val();
-              var name = $("#inputName").val();
-              var password = $("#inputPassword").val();
-            });
-              $.ajax({
-                  type: "POST"
-                  url: 'php/register.php',
-                  data: {
-                    id: id,
-                    name: name,
-                    password: password
-                  }
-                });
-          window.location.replace('index2.html');
-          });
-      </script>
 
   </head>
   <!-- sign-in form style -->
@@ -82,26 +63,26 @@
         <div class="card-body m-4">
           <h5 class="card-title">Create your account </h5>
 
-            <form class="form-signin text-left p-5 " id="signupForm">
+            <form method="POST" onsubmit="ajaxcall();" class="form-signin text-left p-5 " id="signupForm">
 
             <div class="form-label-group">
-              <input type="text" class="form-control" id="inputId" placeholder=" " required>
-              <label for="inputText">Account Name</label>
+              <input type="text" class="form-control" name="username" id="username" placeholder=" " required>
+              <label for="inputText">Username (account id)</label>
             </div>
 
             <div class="form-label-group">
-              <input type="text" class="form-control" id="inputName" placeholder=" " required>
+              <input type="text" class="form-control" name="fullname" id="fullname" placeholder=" " required>
 
-              <label for="inputText">Username</label>
+              <label for="inputText">Full name</label>
             </div>
 
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="" required>
+              <input type="password" name ="password" id="password" class="form-control" placeholder="" required>
               <label for="inputPassword">Password</label>
             </div>
 
           <div class="row justify-content-center p-4  m-3">
-            <input type="button" id="signsub" value="Sign-up" class="btn rounded-pill btn-info">
+            <input type="submit" id="signsub" value="Sign-up" class="btn rounded-pill btn-info">
           </div>
           </form>
         </div>
@@ -110,6 +91,18 @@
 
   </body>
   <script type="text/javascript" src='js/sign.js'></script>
+  <script>
+  function ajaxcall() {
+    // GET DATA
+    var data = new FormData();
+    data.append('username', document.getElementById("username").value);
+    data.append('fullname', document.getElementById("fullname").value);
+    data.append('password', document.getElementById("password").value);
 
-
+    // AJAX CALL
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "php/register.php", true);
+    xhr.send(data);
+  }
+</script>
 </html>
