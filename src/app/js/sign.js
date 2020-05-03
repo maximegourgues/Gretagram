@@ -1,4 +1,3 @@
-
 var modal = document.querySelector('.modal');
 
   document.getElementById('inscription').addEventListener('click', function() {
