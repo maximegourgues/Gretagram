@@ -163,27 +163,26 @@
             <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
               <div class=" col-md-auto col-xl-auto py-md-3">
                     <div class="row justify-content-center ">
-                        <form class="form-label-group" id="new-post" autocomplete="off" action="/action_page.php">
+                        <form class="form-label-group" id="new-post" autocomplete="off" action="upload.php" method="POST" enctype="multipart/form-data">
                             <!--DESCRIPTION CONTAINER-->
                             <div>
                                 <textarea id="text-status" rows="7" cols="60" placeholder="Remplissez votre nouveau post ici"></textarea>
                             </div>
                             <!--UPLOAD FILE CONTAINER-->
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <input type="file" name="file" class="custom-file-input" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
                                 <label class="custom-file-label" for="fileElem">Select some files</label>
                             </div>
                             <!--SEARCH CONTAINER-->
-                            <div class="my-search">
                                 <div class="autocomplete" style="width:300px;">
                                     <input id="myInput" type="text" name="myCountry" placeholder="Emplacement">
                                 </div>
-                                <input type="submit">
-                            </div>
+                            
                             <!--PREVIEW CONTAINER-->
                             <div id="preview-image">
 
                             </div>
+                            <button type="submit" name="submit">UPLOAD</button>
                         </form>
                     </div>
                 </div>
