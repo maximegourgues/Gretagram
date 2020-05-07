@@ -18,6 +18,7 @@ if($conn->connect_error){
   die("Failed to connect".$conn->connect_error);
 }else{
   // header("Location: index.html?connectionsucces");
+  echo "Connection succes";
 }
 
 $user_id = 1;
@@ -31,7 +32,9 @@ $contenu = $_POST['text-status'];
 $likes = 0;
 $comment = 0;
 
-echo "User: $user_id";
+
+
+echo "</br>User: $user_id";
 echo "</br>Latitude: $lat";
 echo "</br>Longitude: $lon";
 echo "</br>Nom de la position: $nom_position";
@@ -44,15 +47,25 @@ echo "</br>Commentaires: $comment";
 
 
 function addNewPost($user_id,$latitude,$longitude,$nom_position,$image_location,$contenu,$likes,$comment){
-
+    return "INSERT INTO posts (user_id, latitude, longitude, nom_position, image_location, contenu, likes, comment) 
+    
+    VALUES ('$user_id', '$lat', '$lon', '$nom_position', '$image_location', '$contenu', '$likes', '$comment')";
+    
 }
 
 
+$sql=addNewPost($user_id,$lat,$lon,$nom_position,$image_location,$contenu,$likes,$comment);
+ 
+if($conn->query($sql) === true){
+    echo "Records inserted successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . $conn->error;
+}
 
-
-
-
-
+// Close connection
+$conn->close();
+echo "Connection closed";
+?>
 
 
 

@@ -12,8 +12,8 @@ CREATE TABLE users (
 CREATE TABLE posts (
 	post_id int AUTO_INCREMENT,
 	user_id int NOT NULL,
-	latitude float,
-	longitude float,
+	latitude varchar(128),
+	longitude varchar(128),
 	nom_position varchar(128),
 	image_location varchar(128),
 	contenu TEXT,
