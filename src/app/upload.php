@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 if (isset($_POST['submit'])){
    $file = $_FILES['file'];
    //print_r($file);
@@ -23,7 +20,7 @@ if (isset($_POST['submit'])){
             $fileNameNew = uniqid('',true).".".$fileActualExt;
             $fileDestination = 'upload/'.$fileNameNew;
             move_uploaded_file($fileTmpName,$fileDestination);
-            header("Location: index.html?uploadsucces");
+            //header("Location: index.html?uploadsucces");
          }else{
             echo "The file is too big !";
          }
@@ -35,3 +32,11 @@ if (isset($_POST['submit'])){
    }
 
 }
+
+
+
+
+
+
+
+

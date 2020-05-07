@@ -142,8 +142,9 @@
             height:100px;
         }
         .obj{
-            display: inline-block;
-            max-height:95px;
+            /*display: inline-block;*/
+            display:flex;
+            max-height:350px;
             width: auto;
             height: auto;
         }
@@ -163,27 +164,30 @@
             <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
               <div class=" col-md-auto col-xl-auto py-md-3">
                     <div class="row justify-content-center ">
-                        <form class="form-label-group" id="new-post" autocomplete="off" action="upload.php" method="POST" enctype="multipart/form-data">
+                        <form class="form-label-group" id="new-post" autocomplete="off" action="push-image.php" method="POST" enctype="multipart/form-data">
                             <!--DESCRIPTION CONTAINER-->
                             <div>
-                                <textarea id="text-status" rows="7" cols="60" placeholder="Remplissez votre nouveau post ici"></textarea>
+                                <textarea id="text-status" name="text-status" rows="7" cols="60" placeholder="Remplissez votre nouveau post ici"></textarea>
                             </div>
                             <!--UPLOAD FILE CONTAINER-->
                             <div class="custom-file">
-                                <input type="file" name="file" class="custom-file-input" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <input type="file" name="file" class="custom-file-input" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
                                 <label class="custom-file-label" for="fileElem">Select some files</label>
                             </div>
                             <!--SEARCH CONTAINER-->
                                 <div class="autocomplete" style="width:300px;">
-                                    <input id="myInput" type="text" name="myCountry" placeholder="Emplacement">
+                                    <input id="myInput" type="text" name="myInput" placeholder="Emplacement">
+                                    <input id="lat_input" type="hidden" name="lat_input">
+                                    <input id="lon_input" type="hidden" name="lon_input">
                                 </div>
                             
-                            <!--PREVIEW CONTAINER-->
-                            <div id="preview-image">
-
-                            </div>
-                            <button type="submit" name="submit">UPLOAD</button>
+                            
+                            <button type="submit" name="submit" id="submit">UPLOAD</button>
                         </form>
+                        <!--PREVIEW CONTAINER-->
+                        <div id="preview-image">
+
+                        </div>
                     </div>
                 </div>
             </main>

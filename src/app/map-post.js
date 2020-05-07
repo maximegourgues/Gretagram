@@ -108,10 +108,13 @@ function updateImputPosition(lat,lon){
 	//console.log(name);
 	while(name.length<4){
 		var name = prompt("Merci de lui donner un nom");
-		$('#myInput').value=name;
-		$('#myInput').data('coords',c);
-		console.log($('#myInput').data('coords'));
+		/*$('#myInput').value=name;
+		$('#myInput').data('coords',coords);*/
+		//console.log($('#myInput').data('coords'));
 	}
+	//var x = document.getElementById("myInput").value;
+	document.getElementById("myInput").value=name;
+	//document.getElementById("preview-image").innerHTML = "Le contenu de l'input est: "+x;
 }
 
   map.on('click',function(e){
@@ -210,8 +213,21 @@ function updateImputPosition(lat,lon){
 	  function onLocationFound(e) {
 		var radius = e.accuracy / 2;
 		var location = e.latlng
+
+		/*var coords = location.split(",");
+		var a = coords[0];
+		var b = coords[1];
+
+		var c = [a,b];*/
+		var c = [location.lat,location.lng];
+
 		L.marker(location,{icon:redIcon}).addTo(map)
 		L.circle(location, radius).addTo(map);
+		//$('#myInput').data('coords',[location.lat,location.lng]);
+		document.getElementById('lat_input').value=location.lat;
+		document.getElementById('lon_input').value=location.lng;
+		//console.log($('#myInput').data('coords'));
+		//console.log(document.getElementById('coords_input').value);
 	  }
 	  
 	  function onLocationError(e) {
@@ -380,8 +396,11 @@ function clickedItem(element){
 		SelectPoints(a,b);
 		map.setView([a,b]);
 		var c = [a,b];
-		$('#myInput').data('coords',c);
-		console.log($('#myInput').data('coords'));
+		/*$('#myInput').data('coords',c);
+		console.log($('#myInput').data('coords'));*/
+		document.getElementById('lat_input').value=location.lat;
+		document.getElementById('lon_input').value=location.lng;
+		//console.log(document.getElementById('coords_input').value);
 	}
 }
 
@@ -399,6 +418,7 @@ function handleFiles(files) {
 	  img.classList.add("obj");
 	  img.file = file;
 	  var preview = document.getElementById('preview-image');
+	  preview.removeChild(preview.firstChild);
 	  preview.appendChild(img); // En admettant que "preview" est l'élément div qui contiendra le contenu affiché. 
   
 	  var reader = new FileReader();
