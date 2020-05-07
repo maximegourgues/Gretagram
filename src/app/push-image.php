@@ -65,6 +65,9 @@ if($conn->query($sql) === true){
 // Close connection
 $conn->close();
 echo "Connection closed";
+
+header('Location: index2.html?upload-successful');
+
 ?>
 
 
