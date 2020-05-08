@@ -19,10 +19,10 @@ CREATE TABLE posts (
 	contenu TEXT,
 	likes int,
 	comment int,
+	date_now datetime,
 	PRIMARY KEY (post_id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
-	UNIQUE (post_id),
-	UNIQUE (user_id)
+	UNIQUE (post_id)
 );
 
 

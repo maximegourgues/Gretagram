@@ -43,18 +43,18 @@ echo "</br>Texte: $contenu";
 echo "</br>Likes: $likes";
 echo "</br>Commentaires: $comment";
 
-
-
+$today = date('Y-m-d H:i:s'); 
+echo "</br>$today";
 
 function addNewPost($user_id,$latitude,$longitude,$nom_position,$image_location,$contenu,$likes,$comment){
-    return "INSERT INTO posts (user_id, latitude, longitude, nom_position, image_location, contenu, likes, comment) 
-    
-    VALUES ('$user_id', '$lat', '$lon', '$nom_position', '$image_location', '$contenu', '$likes', '$comment')";
+    return "INSERT INTO posts (user_id, latitude, longitude, nom_position, image_location, contenu, likes, comment,date_now) 
+    VALUES ('$user_id', '$latitude', '$longitude', '$nom_position', '$image_location', '$contenu', '$likes', '$comment',NOW())";
     
 }
 
-
-$sql=addNewPost($user_id,$lat,$lon,$nom_position,$image_location,$contenu,$likes,$comment);
+if (isset($today)){
+  $sql=addNewPost($user_id,$lat,$lon,$nom_position,$image_location,$contenu,$likes,$comment);
+}
  
 if($conn->query($sql) === true){
     echo "Records inserted successfully.";
@@ -66,7 +66,7 @@ if($conn->query($sql) === true){
 $conn->close();
 echo "Connection closed";
 
-header('Location: index2.html?upload-successful');
+//header('Location: index2.html');
 
 ?>
 
