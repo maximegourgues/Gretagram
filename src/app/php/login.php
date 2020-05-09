@@ -1,11 +1,22 @@
 <?php
   include 'db.inc.php';
-  session_start();
 
-  $sql = "SELECT * FROM user where id = '".$_POST["userid"].
-  "' AND password='".$_POST["password"]."';"
+  if(isset($_POST)){
 
-  if($result -> num_rows > 0){
-    $_SESSION["user"] = $_POST["username"];
-  }
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+
+      $sql = "SELECT Count(*) FROM users WHERE username = ? AND password = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt -> bind_param("ss", $username,$password);
+      $res = $stmt->execute();
+      if($res) {
+        echo 1;
+      }
+      else {
+        echo data;
+      }
+
+    }
+    $conn->close();
 ?>

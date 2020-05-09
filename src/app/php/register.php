@@ -7,7 +7,7 @@ if(isset($_POST)){
   $username = $_POST['username'];
   $password = $_POST['password'];
 
-  $check = "SELECT username FROM users WHERE username = ? Limit 1";
+  //$check = "SELECT username FROM users WHERE username = ? Limit 1";
   $sql = "INSERT INTO users (username, fullname, password) VALUES (?,?,?)";
 
     //check if username is already in db

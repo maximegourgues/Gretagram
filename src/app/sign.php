@@ -24,7 +24,7 @@
   <!-- sign-in form style -->
   <body>
 
-    <form class="form-signin">
+    <form method="POST" class="form-signin">
       <div class="text-center mb-4">
         <img class="mb-4 rounded-circle" src="assets/img/logo/homeicon.jpg" alt="" width="90" height="90">
         <h1 class="h3 mb-3 font-weight-bold">Log in to Gretagram</h1>
@@ -32,8 +32,8 @@
       </div>
 
       <div class="form-label-group">
-        <input type="text" id="inputText" class="form-control" placeholder="User name" required autofocus>
-        <label for="inputUsername">User name</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputUsername">Username</label>
       </div>
 
       <div class="form-label-group">
@@ -45,7 +45,7 @@
         <input type="checkbox" class="custom-control-input" id="customCheck1">
         <label class="custom-control-label" for="customCheck1">Remeber me</label>
       </div>
-      <button class="btn btn-lg btn-info btn-block rounded-pill" type="submit">Log in</button>
+      <button id="login" name="login" class="btn btn-lg btn-info btn-block rounded-pill" type="button">Log in</button>
       <p class="mt-4 mb-3 text-decoration-none text-center"><a href="#" id="inscription">Join us</a></p>
 
   </form>
@@ -62,7 +62,7 @@
             <form method="POST" class="form-signin text-left p-5 " id="signupForm">
 
             <div class="form-label-group">
-              <input type="text" class="form-control" name="username" id="username" placeholder=" " required>
+              <input type="text" class="form-control" name="username" id="username" placeholder=" " required autofocus>
               <label for="inputText">Username</label>
             </div>
 
@@ -89,6 +89,44 @@
 
 
   <script type="text/javascript" src='js/sign.js'></script>
+  <!-- login script -->
+  <script type="text/javascript">
+
+  $(function(){
+    $("#login").click(function() {
+      var username = $("#inputUsername").val();
+      var password = $("#inputPassword").val();
+
+      if(username =='' || password ==''){
+        console.log('empty value')
+      }
+      else {
+        $.ajax({
+          type:'POST',
+          url:'php/login.php',
+          data: {username : username, password : password},
+          success: function(data){
+            if (data != 1) {
+              Swal.fire({
+                 'icon': 'error' ,
+                 'title': 'Login failed !',
+                 'text': data +'Unkown username or wrong password'
+              })
+            }
+              else {
+                location.href = "index2.html";
+                console.log ('gg gros');
+            }
+          },
+          error: function(data){
+            console.log('c pa bon ça woula')
+          }
+        })
+      }
+    })
+  })
+  </script>
+
   <!-- registering script-->
   <script type="text/javascript">
 
@@ -123,9 +161,7 @@
                   })
 
                }
-              },
-              error: function(data){
-              }
+             },
             })
 
           }
