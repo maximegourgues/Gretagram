@@ -1,56 +1,36 @@
 <?php
 
+include 'db.inc.php';
 
-  $server ="localhost";
-  $login = "root";
-  $mdp = "";
-  $db = "gretabase";
+if(isset($_POST)){
+  $fullname = $_POST['fullname'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
-  ///Connexion au serveur MySQL
+  $check = "SELECT username FROM users WHERE username = ? Limit 1";
+  $sql = "INSERT INTO users (username, fullname, password) VALUES (?,?,?)";
 
-  $conn = new mysqli($server, $login, $mdp, $db);
+    //check if username is already in db
+  //  $stmtcheck = $db->prepare($check);
+  //  $num = $stmtcheck->execute([$username]);
+  //  $user = $num->fetch();
 
-  if($conn->connect_error){
-    die("Failed to connect".$conn->connect_error);
+
+  //  if($user){
+  // $username+' is already registered';
+  //  }
+  //  else{
+    $stmt = $conn->prepare($sql);
+    $stmt -> bind_param("sss", $username,$fullname,$password);
+    $res = $stmt->execute();
+    if($res) {
+          echo 1;
+    }
+    else {
+      echo 2;
+    }
+
+  //  }
   }
-
-
-$fullname = $_POST['fullname'];
-$username = $_POST['username'];
-$userpass = $_POST['password'];
-
-$SELECT = "SELECT username FROM users WHERE username = ? Limit 1";
-$INSERT = "INSERT INTO users (username, fullname, password) VALUES (?,?,?)";
-
-fonction save ($username,$fullname,$password) {
-
-  //prepare Statement
-  $stmt = $conn->prepare($SELECT);
-  $stmt->bind_param("s", $username);
-  $stmt->execute();
-  $stmt->bind_result($username);
-  $stmt->store_result();
-  $rnum = $stmt->num_rows;
-
-  if($rnum==0) {
-    $stmt->close();
-    $stmt = $conn->prepare($INSERT);
-    $stmt->bind_param("sss", $username, $fullname, $password);
-    $stmt->execute();
-
-  }
-  $stmt-> close();
-  $conn -> close();
-  return true;
-}
-
-$pass = save($username,$fullname,$password);
-header('Location : ../sign.html')
-
-echo json_encode([
-  "status" => $pass ? 1 : 0,
-  "message" => $pass ? "OK" : "An error has occured"
-]);
-exit();
-
+  $conn->close();
 ?>
