@@ -89,6 +89,7 @@
 
 
   <script type="text/javascript" src='js/sign.js'></script>
+  <!-- registering script-->
   <script type="text/javascript">
 
   $(function () {
@@ -131,12 +132,6 @@
     })
   });
 
-
-/*  Swal.fire({
-    'icon': 'error' ,
-    'title': 'Creation account failed !',
-    'text': 'This username already exists, please chose an other one'
-  })*/
   </script>
 </body>
 </html>
