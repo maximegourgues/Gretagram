@@ -1,8 +1,8 @@
 <?php
-$server ="localhost";
-$login = "root";
-$mdp = "";
-$db = "gretabase";
+$server = 'localhost';
+$login = 'root';
+$mdp = '';
+$db = 'gretabase';
 
 ///Connexion au serveur MySQL
 
