@@ -17,113 +17,13 @@ if($conn->connect_error){
 echo "oui";
 
 
-function time_elapsed_string($datetime, $full = false) {
-  $now = new DateTime;
-  $ago = new DateTime($datetime);
-  $diff = $now->diff($ago);
-
-  $diff->w = floor($diff->d / 7);
-  $diff->d -= $diff->w * 7;
-
-  $string = array(
-      'y' => 'year',
-      'm' => 'month',
-      'w' => 'week',
-      'd' => 'day',
-      'h' => 'hour',
-      'i' => 'minute',
-      's' => 'second',
-  );
-  foreach ($string as $k => &$v) {
-      if ($diff->$k) {
-          $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-      } else {
-          unset($string[$k]);
-      }
-  }
-
-  if (!$full) $string = array_slice($string, 0, 1);
-  return $string ? implode(', ', $string) . ' ago' : 'just now';
-}
-
-function timeAgo($time_ago)
-{
-    $time_ago = strtotime($time_ago);
-    $cur_time   = time();
-    $time_elapsed   = $cur_time - $time_ago;
-    $seconds    = $time_elapsed ;
-    $minutes    = round($time_elapsed / 60 );
-    $hours      = round($time_elapsed / 3600);
-    $days       = round($time_elapsed / 86400 );
-    $weeks      = round($time_elapsed / 604800);
-    $months     = round($time_elapsed / 2600640 );
-    $years      = round($time_elapsed / 31207680 );
-    // Seconds
-    if($seconds <= 60){
-        return "A l'instant";
-    }
-    //Minutes
-    else if($minutes <=60){
-        if($minutes==1){
-            return "Il y a une minute";
-        }
-        else{
-            return "Il y a $minutes minutes";
-        }
-    }
-    //Hours
-    else if($hours <=24){
-        if($hours==1){
-            return "Il y a une heure";
-        }else{
-            return "Il y a $hours heures";
-        }
-    }
-    //Days
-    else if($days <= 7){
-        if($days==1){
-            return "Hier";
-        }else{
-            return "$days jours";
-        }
-    }
-    //Weeks
-    else if($weeks <= 4.3){
-        if($weeks==1){
-            return "La semaine dernière";
-        }else{
-            return "$weeks semaines";
-        }
-    }
-    //Months
-    else if($months <=12){
-        if($months==1){
-            return "Il y a un mois";
-        }else{
-            return "Il y a $months mois";
-        }
-    }
-    //Years
-    else{
-        /*if($years==1){
-            return "one year ago";
-        }else{*/
-            return "$years ans";
-        //}
-    }
-}
-
-$user_id = 1;
-
-//$sql = "SELECT * FROM posts INNER JOIN users WHERE (users.id=posts.user_id) ORDER BY date_now DESC";
-$sql = "SELECT DISTINCT users.id, users.fullname,(posts.post_id), posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=1 ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = 1) ORDER BY date_now DESC";
+$sql = "SELECT * FROM posts INNER JOIN users WHERE (users.id=posts.user_id) ORDER BY post_id";
 $result = $conn->query($sql) or die ("Could not execute query");
  
 while($row = mysqli_fetch_array($result)) {
     extract($row);
     //echo $row;
-    //$actual_hour = time_elapsed_string($date_now, true);
-    $actual_hour = timeAgo($date_now);
+    
     $post='<section class="hero">
             <div class="container">
               <div class="row">	
@@ -139,7 +39,9 @@ while($row = mysqli_fetch_array($result)) {
                       <em class="fa fa-ellipsis-h"></em>
                       </button>
                       <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="#">Hide post</a>
                         <a class="dropdown-item" href="#">Stop following</a>
+                        <a class="dropdown-item" href="#">Report</a>
                       </div>
 			              </div><!--/ dropdown -->
 			              <div class="media m-0">
@@ -148,46 +50,29 @@ while($row = mysqli_fetch_array($result)) {
                       </div>
 			                <div class="media-body">
                         <p class="m-0">'.$fullname.'</p>
-                        <small><span onclick="showOnMap('.$latitude.','.$longitude.')" style="cursor: pointer;"><i class="icon ion-md-pin"></i> '.$nom_position.'</span></small>
-                        </br>
-                        <small><span><i class="icon ion-md-time"></i>'.$actual_hour.'</span></small>
+                        <small><span><i class="icon ion-md-pin"></i> '.$nom_position.'</span></small>
+                        <small><span><i class="icon ion-md-time"></i> '.'AJOUTER UN TIMER ICI'.'</span></small>
                       </div>
 			              </div><!--/ media -->
                   </div><!--/ cardbox-heading -->
                   <div class="cardbox-item">
-                    <img class="img-fluid" src="'.$image_location.'" alt="Image inafficheable">
+                    <img class="img-fluid" src="'.$image_location.'" alt="Image">
                   </div><!--/ cardbox-item -->
                   <div class="cardbox-base">
                     <ul class="float-right">
                       <li><a><i class="fa fa-comments"></i></a></li>
                       <li><a><em class="mr-5">'.$comment.'</em></a></li>
-                      <!--<li><a><i class="fa fa-share-alt"></i></a></li>
-                      <li><a><em class="mr-3">'.'PLACER LE NOMBRE DE PARTAGES ICI'.'</em></a></li>-->
+                      <li><a><i class="fa fa-share-alt"></i></a></li>
+                      <li><a><em class="mr-3">'.'PLACER LE NOMBRE DE PARTAGES ICI'.'</em></a></li>
                     </ul>
                     <ul>
-                      <!--<li><a><i class="fa fa-thumbs-up"></i></a></li>
+                      <li><a><i class="fa fa-thumbs-up"></i></a></li>
                       <!--<li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/3.jpeg" class="img-fluid rounded-circle" alt="User"></a></li>
                       <li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/1.jpg" class="img-fluid rounded-circle" alt="User"></a></li>
                       <li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/5.jpg" class="img-fluid rounded-circle" alt="User"></a></li>
                       <li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/2.jpg" class="img-fluid rounded-circle" alt="User"></a></li>-->
-                      ';
-                      
-                      // determine if user has already liked this post
-                      $results1 = mysqli_query($conn, "SELECT * FROM likes WHERE user_id=$user_id AND post_id=".$row['post_id']."");
-
-                      if (mysqli_num_rows($results1) == 1 ){ 
-                        $post.='<!-- user already likes post -->
-                        <li><a><i id="'.$post_id.'" onclick="unlike('.$post_id.')" class="unlike fa fa-thumbs-up" data-id="'.$row['id'].'"></i> </a></li>
-                        <li><a><i id="'.$post_id.'" onclick="like('.$post_id.')" class="like hide fa fa-thumbs-o-up" data-id="'.$row['id'].'"></i></a></li> ';
-                      }
-                      else{
-                        $post.='<!-- user has not yet liked post -->
-                        <li><a><i id="'.$post_id.'" onclick="like('.$post_id.')" class="like fa fa-thumbs-o-up" data-id="'.$row['id'].'"></i> </a></li>
-                        <li><a><i id="'.$post_id.'" onclick="unlike('.$post_id.')" class="unlike hide fa fa-thumbs-up" data-id="'.$row['id'].'"></i></a></li> ';
-                      }
-                      $post.='<li><a><span id="'.$post_id.'" class="likes_count">'.$likes.'</span></a></li>';
-                      
-                $post.='</ul>			   
+                      <li><a><span>'.$likes.' Likes</span></a></li>
+                    </ul>			   
                   </div><!--/ cardbox-base -->
                   <div class="cardbox-comments">
                     <span class="comment-avatar float-left">
@@ -195,7 +80,7 @@ while($row = mysqli_fetch_array($result)) {
                     </span>
                     <div class="search">
                       <input placeholder="Write a comment" type="text">
-                      <!--<button><i class="fa fa-camera"></i></button>-->
+                      <button><i class="fa fa-camera"></i></button>
                     </div><!--/. Search -->
                   </div><!--/ cardbox-like -->			  
 					
@@ -207,8 +92,13 @@ while($row = mysqli_fetch_array($result)) {
               </div><!--/ row -->
             </div><!--/ container -->
          </section>';
+         //echo $image_location;
       echo $post;
+    //$rssfeed .= '<title>' . $title . '</title>';
     
     }
+
+
+
 
 ?>

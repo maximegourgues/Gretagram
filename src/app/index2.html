@@ -5,19 +5,17 @@
     <!--title-->
     <title>Gretagram</title>
     <!-- Required meta tags -->
-    <meta charset="UTF-8">
+
 
     <!--LINKS FOR BOOTSTRAP SECTION-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    -->
-    <link rel="stylesheet" href="css/hero.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Rokkitt" rel="stylesheet"> 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="css/hero.css">
 
     <!-- Sidebar Head -->
     <link rel="stylesheet" href="css/menu.css">
@@ -31,13 +29,17 @@
     <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
 		<link rel="stylesheet" href="leaflet-search.css" />
     <link rel="stylesheet" href="style.css" />
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <link href="css/index.css" rel="stylesheet">
 
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+     <script type="text/javascript">
+
+      
+
+
 
          $(document).ready(function() {
 
@@ -73,14 +75,9 @@
              });
 
            });
+         });
 
-           
-
-          });
-
-          
-
-    </script>
+       </script>
 
 
 
@@ -135,7 +132,6 @@
             padding:30px;
             margin:20px;
         }
-        
 
     </style>
   </head>
@@ -157,15 +153,14 @@
                     <input type="submit" value="Envoyer">
                   </form>
                   </div>
-                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
                   <div id="content">
                     <script type="text/javascript">
                       $('#content').load('feed.php');
                       //$('#content').load('post-section.html');
                     </script>
-                    
                   </div>
+
             </div>
             </main>
     
@@ -173,6 +168,7 @@
           </div>
     
         </div>
+    
     </div>
 
     <div id='map-container' class='three'>
@@ -185,84 +181,6 @@
         <script src="map.js"></script>
 
     </div>
-    <style>
-      
-      .like, .unlike, .likes_count {
-          color: blue;
-        }
-        .hide {
-          display: none;
-        }
-        .fa-thumbs-up, .fa-thumbs-o-up {
-          /*transform: rotateY(-180deg);*/
-          font-size: 1.3em;
-        }
-    </style>
-    <script>
-
-      function showOnMap(lat,lon){
-          console.log('SHOW ON MAP: '+lat+','+lon);
-          if (theCircle != undefined) {
-            map.removeLayer(theCircle);
-          };
-          if (theMarker != undefined) {
-              map.removeLayer(theMarker);
-          };
-          if (geojsonLayer != undefined) {
-              map.removeLayer(geojsonLayer);
-          };
-          theMarker = L.marker([lat,lon]).addTo(map);
-          map.setView([lat,lon]);
-      }
-
-      function like(postid){
-        //var postid = $('.like').data('id');
-        $post = $('.like');
-        console.log("LIKE");
-        
-        $.ajax({
-          url: 'likes.php',
-          type: 'post',
-          data: {
-            'liked': 1,
-            'postid': postid,
-            'userid' : 1
-          },
-            success: function(response){
-              $('#'+postid+'.likes_count').text(response);
-              $('#'+postid+'.like').addClass('hide');
-              $('#'+postid+'.unlike').removeClass('hide');
-          }
-        });
-      }
-                  
-      // when the user clicks on unlike
-      function unlike(postid){
-        //var postid = $('.like').data('id');
-        $post = $('.like');
-        console.log("UNLIKE");
-        $.ajax({
-          url: 'likes.php',
-          type: 'post',
-          data: {
-            'unliked': 1,
-            'postid': postid,
-            'userid' : 1
-          },
-            success: function(response){
-              /*if(response==0){
-                $('#'+postid+'.likes_count').text("");
-              }else{*/
-              $('#'+postid+'.likes_count').text(response);
-              //}
-              $('#'+postid+'.unlike').addClass('hide');
-              $('#'+postid+'.like').removeClass('hide');
-          }
-        });
-      }
-
-    </script>
-    
   </body>
 
 </html>

@@ -32,8 +32,7 @@ $contenu = $_POST['text-status'];
 $likes = 0;
 $comment = 0;
 
-$contenu = addslashes($contenu);
-$nom_position = addslashes($nom_position);
+
 
 echo "</br>User: $user_id";
 echo "</br>Latitude: $lat";
