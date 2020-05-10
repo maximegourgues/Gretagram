@@ -178,7 +178,7 @@ text-align: center;
 /* Cardbox Comments
 ---------------------------------- */
 .cardbox-comments{
-  padding: 10px 40px 20px 40px !important;
+  padding: 10px 40px 20px 0px !important;
   font-size: 0px;	
   text-align: center;
   display: inline-block;
@@ -196,27 +196,84 @@ text-align: center;
   overflow: auto;
 }
 .search {
+  display:flex;
  position: relative;
  right: -60px;
  top: -40px;
+ right:-43px;
  margin-bottom: -40px;
  border: 2px solid #f4f4f4;	
- width: 100%;
+ width: 95%;
  overflow: hidden;
+ margin-right:0px;
 }
 .search input[type="text"] {
  background-color: #fff;
- line-height: 10px;
+ line-height: 50px;
  padding: 15px 60px 20px 10px;
  border: none;
  border-radius: 4px;
- width: 350px;
+ width: 100%;
  font-family: 'Rokkitt', serif;
  font-size: 14px;
  color: #8d8d8d;
- height: inherit;
+ /*height: inherit;*/
  font-weight: 700;
+ margin: 0px;
 }
+
+.search textarea {
+  display:block;
+  text-align:left;
+  background-color: #fff;
+  line-height: 20px;
+  padding: 5px 5px 5px 5px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  font-family: 'Rokkitt', serif;
+  font-size: 13px;
+  color: #8d8d8d;
+  /*height: inherit;*/
+  font-weight: 700;
+  margin: 0px;
+ }
+
+.search span {
+  display:block;
+  background-color: #fff;
+  line-height: 50px;
+  /*padding: 15px 60px 20px 10px;*/
+  padding: 5px 5px 5px 5px;
+  border: none;
+  border-radius: 4px;
+  width: 200px;
+  font-family: 'Rokkitt', serif;
+  font-size: 14px;
+  color: #8d8d8d;
+  height: inherit;
+  font-weight: 700;
+  margin: 0px;
+ }
+
+ .search label {
+  min-height: 40px;
+  display:block;
+  text-align:left;
+  background-color: #fff;
+  line-height: 20px;
+  padding: 5px 5px 5px 5px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  font-family: 'Rokkitt', serif;
+  font-size: 13px;
+  color: #8d8d8d;
+  /*height: inherit;*/
+  font-weight: 700;
+  margin: 0px;
+ }
+
 .search button {
  position: absolute;
  right: 0;

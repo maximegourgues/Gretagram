@@ -46,8 +46,7 @@ function time_elapsed_string($datetime, $full = false) {
   return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
-function timeAgo($time_ago)
-{
+function timeAgo($time_ago){
     $time_ago = strtotime($time_ago);
     $cur_time   = time();
     $time_elapsed   = $cur_time - $time_ago;
@@ -116,7 +115,7 @@ function timeAgo($time_ago)
 $user_id = 1;
 
 //$sql = "SELECT * FROM posts INNER JOIN users WHERE (users.id=posts.user_id) ORDER BY date_now DESC";
-$sql = "SELECT DISTINCT users.id, users.fullname,(posts.post_id), posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=1 ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = 1) ORDER BY date_now DESC";
+$sql = "SELECT DISTINCT users.id, users.avatar, users.fullname,posts.post_id, posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=1 ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = 1) ORDER BY date_now DESC";
 $result = $conn->query($sql) or die ("Could not execute query");
  
 while($row = mysqli_fetch_array($result)) {
@@ -144,7 +143,7 @@ while($row = mysqli_fetch_array($result)) {
 			              </div><!--/ dropdown -->
 			              <div class="media m-0">
 			                <div class="d-flex mr-3">
-                       <a href=""><img class="img-fluid rounded-circle" src="'.'profile_pictures/unknown_user.png'.'" alt="User"></a>
+                       <a href=""><img class="img-fluid rounded-circle" src="'.$avatar.'" alt="User"></a>
                       </div>
 			                <div class="media-body">
                         <p class="m-0">'.$fullname.'</p>
@@ -189,15 +188,77 @@ while($row = mysqli_fetch_array($result)) {
                       
                 $post.='</ul>			   
                   </div><!--/ cardbox-base -->
-                  <div class="cardbox-comments">
-                    <span class="comment-avatar float-left">
-                    <a href=""><img class="rounded-circle" src="'.'profile_pictures/unknown_user.png'.'" alt="..."></a>                            
-                    </span>
-                    <div class="search">
-                      <input placeholder="Write a comment" type="text">
-                      <!--<button><i class="fa fa-camera"></i></button>-->
-                    </div><!--/. Search -->
-                  </div><!--/ cardbox-like -->			  
+                  <div class="cardbox-comments ">';
+                  $result2 = mysqli_query($conn,"SELECT comments.comment_id, comments.user_id, comments.post_id, comments.contenu, users.avatar FROM comments INNER JOIN users ON comments.user_id=users.id WHERE comments.post_id = ".$row['post_id']." ORDER BY comment_id");
+                 // $result2 = $conn->query($sql1) or die ("Could not execute query");
+                  //echo $post_id;
+                  $post.='<table class="table'.$post_id.'">';
+                  while($row2 = mysqli_fetch_array($result2)) {
+                    //echo $contenu;
+                    //echo "OUI";
+                    /*$post.='
+                    <ul>
+
+                      <li>
+                        <span class="comment-avatar float-left">
+                          <a href=""><img class="rounded-circle" src="'.$avatar.'" alt="..."></a>                            
+                        </span>
+                        <div class="search">
+                          <span>'.$contenu.'</span>
+                          <!--<button><i class="fa fa-camera"></i></button>-->
+                        </div><!--/. Search -->
+                      </li>';*/
+                    $post.='<tr>
+                    <td>
+                              <span class="comment-avatar float-left">
+                                <a href=""><img class="rounded-circle" src="'.$avatar.'" alt="..."></a>                            
+                              </span></tr>
+                              </td>
+                              <td>
+                              <div class="search">
+                                <label>'.$row2['contenu'].'</label>
+                                <!--<button><i class="fa fa-camera"></i></button>-->
+                              </div><!--/. Search -->
+                              </td>
+                            </tr>
+                            ';
+                  }
+                 /* $post.='
+
+                      <li>
+                        <span class="comment-avatar float-left">
+                          <a href=""><img class="rounded-circle" src="'.'profile_pictures/unknown_user.png'.'" alt="..."></a>                            
+                        </span>
+                        <div class="search">
+                          <textarea id="text-status" name="text-status"  placeholder="Remplissez votre nouveau post ici"></textarea>
+                          <!--<input placeholder="Write a comment" type="text">-->
+                          <!--<button><i class="fa fa-camera"></i></button>-->
+                        </div><!--/. Search -->
+                      </li>
+                    </ul>*/
+
+                  $post.='<tr class="commentspace'.$post_id.'">
+                  <td>
+                            <span class="comment-avatar float-left">
+                              <a href=""><img class="rounded-circle" src="'.'profile_pictures/unknown_user.png'.'" alt="..."></a>                            
+                            </span>
+                            
+                            <div class="search">
+                            <ul>
+                              <li>
+                                <textarea id="text-status" name="text-status" class="comment'.$post_id.'"  placeholder="Remplissez votre nouveau post ici"></textarea>
+                                <!--<input placeholder="Write a comment" type="text">-->
+                              </li>
+                                <li>
+                                  <button onclick="uploadComment('.$post_id.')"><i class="fa fa-camera"></i></button>
+                                </li>
+                              </ul>
+                            </div><!--/. Search -->
+                            </td>
+                          </tr>
+                          </table>';
+
+                  $post.='</div><!--/ cardbox-like -->			  
 					
 			            </div><!--/ cardbox -->
 
@@ -207,6 +268,7 @@ while($row = mysqli_fetch_array($result)) {
               </div><!--/ row -->
             </div><!--/ container -->
          </section>';
+                  
       echo $post;
     
     }

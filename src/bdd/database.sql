@@ -5,6 +5,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL,
 	fullname varchar(50),
 	password varchar(128),
+	avatar varchar(128),
 	PRIMARY KEY (id),
 	UNIQUE (username)
 );
@@ -34,6 +35,7 @@ CREATE TABLE likes (
 
 CREATE TABLE comments (
 	comment_id int AUTO_INCREMENT,
+	user_id int NOT NULL,
 	post_id int NOT NULL,
 	contenu text NOT NULL,
 	UNIQUE(comment_id),
@@ -53,16 +55,16 @@ CREATE TABLE followers (
 );
 
 
-INSERT INTO users (username,fullname,password) VALUES ('Syldrom', 'Sylvain Lagarde','19/12/99');
-INSERT INTO users (username,fullname,password) VALUES ('Random1','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random2','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random3','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random4','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random5','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random6','Random','123456');
-INSERT INTO users (username,fullname,password) VALUES ('Random7','Random','123456');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Syldrom', 'Sylvain Lagarde','19/12/99','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random1','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random2','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random3','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random4','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random5','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random6','Random','123456','profile_pictures/unknown_user.png');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random7','Random','123456','profile_pictures/unknown_user.png');
 
-INSERT INTO users (username,fullname,password) VALUES ('Random8','Random','123456');
+INSERT INTO users (username,fullname,password,avatar) VALUES ('Random8','Random','123456','profile_pictures/unknown_user.png');
 
 INSERT INTO followings(user_id,follow_id) VALUES ('1','2');
 INSERT INTO followings(user_id,follow_id) VALUES ('1','3');
@@ -77,4 +79,8 @@ INSERT INTO followers(user_id,follower_id) VALUES ('4','1');
 INSERT INTO followers(user_id,follower_id) VALUES ('5','1');
 INSERT INTO followers(user_id,follower_id) VALUES ('6','1');
 INSERT INTO followers(user_id,follower_id) VALUES ('7','1');
+
+INSERT INTO comments(user_id,post_id,contenu) VALUES ('1','5','Woullillah ceci est un commentaire bonsoir regardez moi starfoullah');
+
+
 

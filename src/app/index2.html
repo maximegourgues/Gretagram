@@ -200,6 +200,39 @@
     </style>
     <script>
 
+      function uploadComment(id){
+        console.log("Upload d'un commentaire sur le post: "+id);
+        $comment_content=$('.comment'+id).val();
+        //console.log($comment_content);
+        //$('.table'+id).empty();
+        $('.comment'+id).val('');
+
+        $.ajax({
+          url: 'addComment.php',
+          type: 'post',
+          data: {
+            'postid': id,
+            'contenu': $comment_content,
+            'userid' : 1 //DEFINIR ICI LE USER ID
+          },
+            success: function(response){
+              //console.log(response);
+              //console.log($('.table'+id));
+              //$('.table'+id).append(response);
+              $tab = response.split(",");
+              console.log($tab[0]);
+              if (response[0]=true){
+                console.log(response);
+                $('.table'+id+':last-child:last-child').prepend("<tr> <td><span class='comment-avatar float-left'><a href=''><img class='rounded-circle' src='"+$tab[1]+"' alt='...'></a></span></td></tr><tr><td><div class='search'>"
+                  +"<label>"+$comment_content+"</label></div><!--/. Search --></td></tr>");
+              }
+            }
+        });
+      }
+          
+          
+      
+
       function showOnMap(lat,lon){
           console.log('SHOW ON MAP: '+lat+','+lon);
           if (theCircle != undefined) {
