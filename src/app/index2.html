@@ -161,7 +161,20 @@
 
                   <div id="content">
                     <script type="text/javascript">
-                      $('#content').load('feed.php');
+                      $user_id=1;
+                        $.ajax({
+                          url: 'feed.php',
+                          type: 'post',
+                          data: {
+                              'user_id': $user_id
+                          },
+                              success: function(response){
+                                console.log(response);
+                              $('#content').append(response);
+                              }
+                          });
+                      //$('#content').load('feed.php');
+                      //$('#content').load('feedForUser.php');
                       //$('#content').load('post-section.html');
                     </script>
                     

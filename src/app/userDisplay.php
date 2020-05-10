@@ -15,10 +15,11 @@ if($conn->connect_error){
 }
 
 $user_id = $_POST['user_id'];
-echo $user_id;
+$profile_id = $_POST['profile_id'];
+//echo $user_id;
 //echo "oui";
 
-$sql = "SELECT * FROM users WHERE id=$user_id";
+$sql = "SELECT * FROM users WHERE id='$profile_id'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 
@@ -38,9 +39,15 @@ $row = mysqli_fetch_array($result);
             </div>
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
-            <div class="profile-userbuttons">
-                <button type="button" class="btn btn-success btn-sm">Follow</button>
-                <button type="button" class="btn btn-danger btn-sm">Message</button>
+            <div class="profile-userbuttons">';
+            $sql1 = "SELECT * FROM followings WHERE (user_id=$user_id AND follow_id='$profile_id')";
+            $result1 = mysqli_query($conn,$sql);
+            if (mysqli_num_rows($result1) == 1 ){
+                $post.='<button type="button" onclick="follow('.$user_id.','.$profile_id.')" class="btn btn-success btn-sm">Suivre</button>';
+            }else{
+                $post.='<button type="button" onclick="unfollow('.$user_id.','.$profile_id.')" class="btn /*btn-success*/ btn-sm" style="background-color:lightblue;">Suivi</button>';
+            }
+                $post.='<button type="button" class="btn btn-danger btn-sm">Message</button>
             </div>
             <!-- END SIDEBAR BUTTONS -->
             <!-- SIDEBAR MENU -->

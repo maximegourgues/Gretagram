@@ -11,10 +11,10 @@ if($conn->connect_error){
   die("Failed to connect".$conn->connect_error);
 }else{
   // header("Location: index.html?connectionsucces");
-  echo "Connection successful</br>";
+  //echo "Connection successful</br>";
 }
 
-echo "oui";
+//echo "oui";
 
 
 function time_elapsed_string($datetime, $full = false) {
@@ -112,10 +112,10 @@ function timeAgo($time_ago){
     }
 }
 
-$user_id = 1;
+$user_id = $_POST['user_id'];
 
 //$sql = "SELECT * FROM posts INNER JOIN users WHERE (users.id=posts.user_id) ORDER BY date_now DESC";
-$sql = "SELECT DISTINCT users.id, users.avatar, users.fullname,posts.post_id, posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=1 ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = 1) ORDER BY date_now DESC";
+$sql = "SELECT DISTINCT users.username, users.id, users.avatar, users.fullname,posts.post_id, posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=$user_id ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = $user_id) ORDER BY date_now DESC";
 $result = $conn->query($sql) or die ("Could not execute query");
  
 while($row = mysqli_fetch_array($result)) {
@@ -143,7 +143,7 @@ while($row = mysqli_fetch_array($result)) {
 			              </div><!--/ dropdown -->
 			              <div class="media m-0">
 			                <div class="d-flex mr-3">
-                       <a href=""><img class="img-fluid rounded-circle" src="'.$avatar.'" alt="User"></a>
+                       <a href="profile.html?profile='.$row['username'].'"><img class="img-fluid rounded-circle" src="'.$avatar.'" alt="User"></a>
                       </div>
 			                <div class="media-body">
                         <p class="m-0">'.$fullname.'</p>
@@ -189,7 +189,7 @@ while($row = mysqli_fetch_array($result)) {
                 $post.='</ul>			   
                   </div><!--/ cardbox-base -->
                   <div class="cardbox-comments ">';
-                  $result2 = mysqli_query($conn,"SELECT comments.comment_id, comments.user_id, comments.post_id, comments.contenu, users.avatar FROM comments INNER JOIN users ON comments.user_id=users.id WHERE comments.post_id = ".$row['post_id']." ORDER BY comment_id");
+                  $result2 = mysqli_query($conn,"SELECT comments.comment_id, comments.user_id, comments.post_id, comments.contenu, users.avatar, users.username FROM comments INNER JOIN users ON comments.user_id=users.id WHERE comments.post_id = ".$row['post_id']." ORDER BY comment_id");
                  // $result2 = $conn->query($sql1) or die ("Could not execute query");
                   //echo $post_id;
                   $post.='<table class="table'.$post_id.'">';
@@ -211,7 +211,7 @@ while($row = mysqli_fetch_array($result)) {
                     $post.='<tr>
                     <td>
                               <span class="comment-avatar float-left">
-                                <a href=""><img class="rounded-circle" src="'.$avatar.'" alt="..."></a>                            
+                                <a href="profile.html?profile='.$row2['username'].'"><img class="rounded-circle" src="'.$avatar.'" alt="..."></a>                            
                               </span></tr>
                               </td>
                               <td>

@@ -194,6 +194,8 @@
 
     </style>
 
+    
+
     </head>
     <body ng-app="" style="color: white; background-color: rgb(21, 32, 43); overflow-y: scroll;">
 
@@ -216,15 +218,29 @@
                                     
                                 </div>
                             </br>
+                            <style>
+        
+                                .like, .unlike, .likes_count {
+                                    color: blue;
+                                }
+                                .hide {
+                                    display: none;
+                                }
+                                .fa-thumbs-up, .fa-thumbs-o-up {
+                                    /*transform: rotateY(-180deg);*/
+                                    font-size: 1.3em;
+                                }
+                            </style>
                                 <div class="profile-content" style="width:700px;">
                                     <script>
-                                        function feed_user(user_id){
+                                        function feed_user(user_id,profile_id){
                                             
                                             $.ajax({
                                             url: 'userDisplay.php',
                                             type: 'post',
                                             data: {
-                                                'user_id': user_id
+                                                'user_id': user_id,
+                                                'profile_id': profile_id
                                             },
                                                 success: function(response){
                                                 $('.profile-sidebar').append(response);
@@ -235,15 +251,39 @@
                                             url: 'feedForUser.php',
                                             type: 'post',
                                             data: {
-                                                'user_id': user_id
+                                                'user_id': user_id,
+                                                'profile_id': profile_id
                                             },
                                                 success: function(response){
                                                 $('.profile-content').append(response);
                                                 }
                                             });
                                         }
-
-                                        feed_user(1);
+                                        const urlParams = new URLSearchParams(window.location.search);
+                                        const profile = urlParams.get('profile');
+                                        console.log(profile);
+                                        /*if (profile!=""){
+                                            //REDIRECT 404 
+                                            console.log("fail");
+                                        }else{*/
+                                            //console.log(profile)
+                                            $.ajax({
+                                            url: 'usernameToId.php',
+                                            type: 'post',
+                                            data: {
+                                                'user_name':profile
+                                            },
+                                                success: function(response){
+                                                    $profile_id=response;
+                                                    //console.log(profile_id);
+                                                    feed_user(2,$profile_id);
+                                                },error:function(response){
+                                                    console.log(response)
+                                                    console.log("error ajax");
+                                                }
+                                            });
+                                            
+                                       // }
 
                                     </script>
                                  </div>
@@ -272,7 +312,141 @@
             <script src="map.js"></script>
 
         </div>
-        
+        <script>
+
+            function follow(user_id,profile_id){
+                console.log("follow");
+                $newButton = '<button type="button" onclick="unfollow('+user_id+','+profile_id+')" class="btn /*btn-success*/ btn-sm" style="background-color:lightblue;">Suivi</button><button type="button" class="btn btn-danger btn-sm">Message</button>';
+
+                $.ajax({
+                    url: 'follow.php',
+                    type: 'post',
+                    data: {
+                        'follow_id': profile_id,
+                        'user_id' : user_id //DEFINIR ICI LE USER ID
+                    },
+                    success: function(response){
+                        $('.profile-userbuttons').empty();
+                        $('.profile-userbuttons').append($newButton);
+                        console.log(response);
+                    }
+                });
+            }
+
+            function unfollow(user_id,profile_id){
+                console.log("unfollow");
+                $newButton = '<button type="button" onclick="follow('+user_id+','+profile_id+')" class="btn btn-success btn-sm">Suivre</button><button type="button" class="btn btn-danger btn-sm">Message</button>';
+                
+                $.ajax({
+                    url: 'unfollow.php',
+                    type: 'post',
+                    data: {
+                        'follow_id': profile_id,
+                        'user_id' : user_id //DEFINIR ICI LE USER ID
+                    },
+                    success: function(response){
+                        $('.profile-userbuttons').empty();
+                        $('.profile-userbuttons').append($newButton);
+                        console.log(response);
+                    }
+                });
+            }
+
+            function uploadComment(id){
+              console.log("Upload d'un commentaire sur le post: "+id);
+              $comment_content=$('.comment'+id).val();
+              //console.log($comment_content);
+              //$('.table'+id).empty();
+              $('.comment'+id).val('');
+      
+              $.ajax({
+                url: 'addComment.php',
+                type: 'post',
+                data: {
+                  'postid': id,
+                  'contenu': $comment_content,
+                  'userid' : 1 //DEFINIR ICI LE USER ID
+                },
+                  success: function(response){
+                    //console.log(response);
+                    //console.log($('.table'+id));
+                    //$('.table'+id).append(response);
+                    $tab = response.split(",");
+                    console.log($tab[0]);
+                    if (response[0]=true){
+                      console.log(response);
+                      $('.table'+id+':last-child:last-child').prepend("<tr> <td><span class='comment-avatar float-left'><a href=''><img class='rounded-circle' src='"+$tab[1]+"' alt='...'></a></span></td></tr><tr><td><div class='search'>"
+                        +"<label>"+$comment_content+"</label></div><!--/. Search --></td></tr>");
+                    }
+                  }
+              });
+            }
+                
+                
+            
+      
+            function showOnMap(lat,lon){
+                console.log('SHOW ON MAP: '+lat+','+lon);
+                if (theCircle != undefined) {
+                  map.removeLayer(theCircle);
+                };
+                if (theMarker != undefined) {
+                    map.removeLayer(theMarker);
+                };
+                if (geojsonLayer != undefined) {
+                    map.removeLayer(geojsonLayer);
+                };
+                theMarker = L.marker([lat,lon]).addTo(map);
+                map.setView([lat,lon]);
+            }
+      
+            function like(postid){
+              //var postid = $('.like').data('id');
+              $post = $('.like');
+              console.log("LIKE");
+              
+              $.ajax({
+                url: 'likes.php',
+                type: 'post',
+                data: {
+                  'liked': 1,
+                  'postid': postid,
+                  'userid' : 1
+                },
+                  success: function(response){
+                    $('#'+postid+'.likes_count').text(response);
+                    $('#'+postid+'.like').addClass('hide');
+                    $('#'+postid+'.unlike').removeClass('hide');
+                }
+              });
+            }
+                        
+            // when the user clicks on unlike
+            function unlike(postid){
+              //var postid = $('.like').data('id');
+              $post = $('.like');
+              console.log("UNLIKE");
+              $.ajax({
+                url: 'likes.php',
+                type: 'post',
+                data: {
+                  'unliked': 1,
+                  'postid': postid,
+                  'userid' : 1
+                },
+                  success: function(response){
+                    /*if(response==0){
+                      $('#'+postid+'.likes_count').text("");
+                    }else{*/
+                    $('#'+postid+'.likes_count').text(response);
+                    //}
+                    $('#'+postid+'.unlike').addClass('hide');
+                    $('#'+postid+'.like').removeClass('hide');
+                }
+              });
+            }
+      
+          </script>
     </body>
 </html>
 
