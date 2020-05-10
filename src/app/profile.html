@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <!--title-->
+    <title>Gretagram</title>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+
+    <!--LINKS FOR BOOTSTRAP SECTION-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    -->
+    <link rel="stylesheet" href="css/hero.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Rokkitt" rel="stylesheet"> 
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- Sidebar Head -->
+    <link rel="stylesheet" href="css/menu.css">
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" crossorigin="anonymous"></script>
+    <ng-include src="'scripts/headscripts.html'"></ng-include>
+
+    <!--leaflet-->
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+		<link rel="stylesheet" href="leaflet-search.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+
+    <link href="css/index.css" rel="stylesheet">
+
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <style type="text/css">
+
+        .leaflet-popup-content{
+            color:black;
+        }
+
+        div{   
+            position:relative;
+            
+        }
+        #main{
+            display:flex;
+        }
+        .one {
+            border:solid 1px;
+            height:100px;
+            width:500px;
+            padding:30px;
+            margin:50px;
+        }
+
+        .two {
+            border:solid 1px;
+            height:100px;
+            width:2000px;
+            padding:30px;
+            margin:50px;
+        }
+
+        .two-trans {
+            border:solid 1px;
+            height:100px;
+            width:2000px;
+            padding:30px;
+            margin:50px;
+        }
+
+        .three {
+            height: 800px; 
+            width: 1000px;
+            transition-duration:0.5s;
+        }
+
+        .three-trans {
+            transition-duration:0.5s;
+        }
+
+        #map-container{
+            padding:30px;
+            margin:20px;
+        }
+        .profile {
+        margin: 20px 0;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+        padding: 20px 0 10px 0;
+        background: #fff;
+        }
+
+        .profile-userpic img {
+        float: none;
+        margin: 0 auto;
+        width: 50%;
+        height: 50%;
+        -webkit-border-radius: 50% !important;
+        -moz-border-radius: 50% !important;
+        border-radius: 50% !important;
+        }
+
+        .profile-usertitle {
+        text-align: center;
+        margin-top: 20px;
+        }
+
+        .profile-usertitle-name {
+        color: #5a7391;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 7px;
+        }
+
+        .profile-usertitle-job {
+        /*text-transform: uppercase;*/
+        color: #5b9bd1;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        }
+
+        .profile-userbuttons {
+        text-align: center;
+        margin-top: 10px;
+        }
+
+        .profile-userbuttons .btn {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 15px;
+        margin-right: 5px;
+        }
+
+        .profile-userbuttons .btn:last-child {
+        margin-right: 0px;
+        }
+            
+        .profile-usermenu {
+        margin-top: 30px;
+        }
+
+        .profile-usermenu ul li {
+        border-bottom: 1px solid #f0f4f7;
+        }
+
+        .profile-usermenu ul li:last-child {
+        border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+        color: #93a3b5;
+        font-size: 14px;
+        font-weight: 400;
+        }
+
+        .profile-usermenu ul li a i {
+        margin-right: 8px;
+        font-size: 14px;
+        }
+
+        .profile-usermenu ul li a:hover {
+        background-color: #fafcfd;
+        color: #5b9bd1;
+        }
+
+        .profile-usermenu ul li.active {
+        border-bottom: none;
+        }
+
+        .profile-usermenu ul li.active a {
+        color: #5b9bd1;
+        background-color: #f6f9fb;
+        border-left: 2px solid #5b9bd1;
+        margin-left: -2px;
+        }
+
+        /* Profile Content */
+        .profile-content {
+        padding: 20px;
+        background: #fff;
+        min-height: 460px;
+        }
+
+    </style>
+
+    </head>
+    <body ng-app="" style="color: white; background-color: rgb(21, 32, 43); overflow-y: scroll;">
+
+        <div class="container-fluid ">
+            <div class="container">
+            <div class="row flex-xl-nowrap">
+                <div class="col-12 col-md-3 col-xl-4 bd-sidebar">
+                <header ng-include src="'templates/menu.html'"></header>
+                </div>
+                <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
+                <div class=" col-md-auto col-xl-auto py-md-3">
+                    
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+                    <div class="container">
+                        <div class="row profile">
+                            <div class="col-md-3">
+                                <!--MODIFIER CELUI LA POUR QU'IL PRENNE TOUTE LA PLACE-->
+                                <div class="profile-sidebar">
+                                    
+                                </div>
+                            </br>
+                                <div class="profile-content" style="width:700px;">
+                                    <script>
+                                        function feed_user(user_id){
+                                            
+                                            $.ajax({
+                                            url: 'userDisplay.php',
+                                            type: 'post',
+                                            data: {
+                                                'user_id': user_id
+                                            },
+                                                success: function(response){
+                                                $('.profile-sidebar').append(response);
+                                                }
+                                            });
+
+                                            $.ajax({
+                                            url: 'feedForUser.php',
+                                            type: 'post',
+                                            data: {
+                                                'user_id': user_id
+                                            },
+                                                success: function(response){
+                                                $('.profile-content').append(response);
+                                                }
+                                            });
+                                        }
+
+                                        feed_user(1);
+
+                                    </script>
+                                 </div>
+                            </div>
+                        
+
+                             
+                        </div>
+                    </div>
+
+                </div>
+                </main>
+
+
+            </div>
+
+            </div>
+        </div>
+        <div id='map-container' style="width: 500px;height: 400px;">
+            
+            <div id="map" ></div>
+            <!--<input type='button' id='size' value='Reduce'>-->
+    
+            <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+            <script src="leaflet-search.js"></script>
+            <script src="map.js"></script>
+
+        </div>
+        
+    </body>
+</html>
+
