@@ -254,6 +254,7 @@
                                             },
                                                 success: function(response){
                                                 $('.profile-sidebar').append(response);
+                                                //console.log("yo:"+profile_id)
                                                 }
                                             });
 
@@ -284,7 +285,7 @@
                                             console.log('Utilisateur:'+c);
                                         
 
-                                        if (profile!=""){
+                                        if (profile==""){
                                             window.location.replace('404.html');
                                             console.log("fail");
                                         }else{
@@ -298,14 +299,15 @@
                                                 success: function(response){
                                                     $profile_id=response;
                                                     //console.log(profile_id);
-                                                    feed_user(1,$profile_id);
+                                                    feed_user(c,$profile_id);
                                                 },error:function(response){
                                                     console.log(response)
                                                     console.log("error ajax");
                                                 }
                                             });
                                             
-                                        }}
+                                        }
+                                    }
 
                                     </script>
                                  </div>

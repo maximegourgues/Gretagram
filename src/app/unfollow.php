@@ -27,4 +27,5 @@ if (mysqli_num_rows($result) == 1 ){
 }else{
     echo "echec du unfollow";
 }
+echo $user_id;
 ?>

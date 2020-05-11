@@ -27,5 +27,5 @@ if (mysqli_num_rows($result) == 1 ){
     mysqli_query($conn, "INSERT INTO followings (user_id, follow_id) VALUES ($user_id,$follow_id)");
     mysqli_query($conn, "INSERT INTO followers (user_id, follower_id) VALUES ($follow_id,$user_id)");
 }
-//echo $user_id;
+echo $user_id;
 ?>

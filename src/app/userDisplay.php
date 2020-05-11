@@ -41,12 +41,14 @@ $row = mysqli_fetch_array($result);
             <!-- END SIDEBAR USER TITLE -->
             <!-- SIDEBAR BUTTONS -->
             <div class="profile-userbuttons">';
-            $sql1 = "SELECT * FROM followings WHERE (user_id=$user_id AND follow_id='$profile_id')";
+            $sql1 = "SELECT * FROM followings WHERE (user_id=$user_id AND follow_id=$profile_id)";
             $result1 = mysqli_query($conn,$sql);
             if (mysqli_num_rows($result1) == 1 ){
-                $post.='<button type="button" onclick="follow('.$user_id.','.$profile_id.')" class="btn btn-success btn-sm">Suivre</button>';
-            }else{
                 $post.='<button type="button" onclick="unfollow('.$user_id.','.$profile_id.')" class="btn /*btn-success*/ btn-sm" style="background-color:lightblue;">Suivi</button>';
+
+            }else{
+                $post.='<button type="button" onclick="follow('.$user_id.','.$profile_id.')" class="btn btn-success btn-sm">Suivre</button>';
+
             }
                 $post.='<button type="button" class="btn btn-danger btn-sm">Message</button>
             </div>

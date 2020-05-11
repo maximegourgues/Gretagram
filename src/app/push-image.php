@@ -22,7 +22,7 @@ if($conn->connect_error){
 }
 
 $user_id = 1;
-echo $_POST['user_input'];
+$user_id = $_POST['user_input'];
 
 //$user_id = $mysqli->real_escape_string($_REQUEST['user_id']);
 $nom_position = $_POST['myInput'];
