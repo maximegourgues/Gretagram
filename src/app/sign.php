@@ -102,11 +102,12 @@
       var myCookies ={};
 
       function saveCookies(){
-        myCookies[username]='connected';
+        var id = username;
+        myCookies[id]='connected';
         document.cookie="";
         var expireAttribute = new Date(Date.now()+60*500).toString();
         console.log(expireAttribute);
-        cookieString = (username+"="+username+"; expires="+expireAttribute) ;
+        cookieString = (id+"="+myCookies[id]+"; expires="+expireAttribute) ;
         document.cookie=cookieString;
         }
 
@@ -128,8 +129,8 @@
               })
             }
               else {
-              saveCookies();
-                location.href = "index2.html";
+                saveCookies();
+                //location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
             }
