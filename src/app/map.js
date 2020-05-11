@@ -62,7 +62,7 @@ var geojsonLayer;
 	
     promise.then(function(data) {
 		
-        sites = L.geoJson(data, {
+        var sites = L.geoJson(data, {
 			
             pointToLayer: function(feature, coordinates) {
 				var m = L.circleMarker(coordinates, {

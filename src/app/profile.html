@@ -376,6 +376,13 @@
                 });
             }
 
+
+            var a = document.cookie.split(';');
+            //console.log(a);
+            var b = document.cookie.split('=');
+            var c = b[0];
+            //console.log('Utilisateur:'+c);            
+
             function uploadComment(id){
               console.log("Upload d'un commentaire sur le post: "+id);
               $comment_content=$('.comment'+id).val();
@@ -389,7 +396,7 @@
                 data: {
                   'postid': id,
                   'contenu': $comment_content,
-                  'userid' : 1 //DEFINIR ICI LE USER ID
+                  'userid' : c //DEFINIR ICI LE USER ID
                 },
                   success: function(response){
                     //console.log(response);
@@ -435,7 +442,7 @@
                 data: {
                   'liked': 1,
                   'postid': postid,
-                  'userid' : 1
+                  'userid' : c
                 },
                   success: function(response){
                     $('#'+postid+'.likes_count').text(response);
@@ -456,7 +463,7 @@
                 data: {
                   'unliked': 1,
                   'postid': postid,
-                  'userid' : 1
+                  'userid' : c
                 },
                   success: function(response){
                     /*if(response==0){
