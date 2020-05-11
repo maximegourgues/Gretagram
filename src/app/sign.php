@@ -99,6 +99,19 @@
       var username = $("#inputUsername").val();
       var password = $("#inputPassword").val();
 
+      var myCookies ={};
+
+      function saveCookies(){
+        myCookies[username]='connected';
+        document.cookie="";
+        var expireAttribute = new Date(Date.now()+60).toString();
+        var cookieString="";
+        for(var key in myCookies) {
+          cookieString = key+"="+myCookies[key]+";"+expireAttribute+";";
+          document.cookie=cookieString;
+        }
+
+      }
 
       if(username =='' || password ==''){
         console.log('empty value')
@@ -117,7 +130,7 @@
               })
             }
               else {
-              saveCookies(username);
+              saveCookies();
                 location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);

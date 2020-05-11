@@ -1,26 +1,5 @@
-var myCookies ={};
 
-function saveCookies(name){
-  myCookies[username]='connected';
-  document.cookie="";
-  var expireAttribute = new Date(Date.now()+60).toString();
-  var cookieString="";
-  for(var key in myCookies) {
-    cookieString = key+"="+myCookies[key]+";"+expireAttribute+";";
-    document.cookie=cookieString;
-  }
 
-}
-function loadCookies(){
-  myCookies={};
-  var kv= document.cookie.split(';');
-  for(var id in kv ){
-    var cookie = kv[id].split("=");
-    myCookies[cookie[0].trim()] = cookie[1];
-  }
-  username=myCookies[username];
-
-}
   function deleteCookie(cname) {
     var d = new Date(); //Create an date object
     d.setTime(d.getTime() - (1000*60*60*24)); //Set the time to the past. 1000 milliseonds = 1 second
