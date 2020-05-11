@@ -105,13 +105,12 @@
         myCookies[username]='connected';
         document.cookie="";
         var expireAttribute = new Date(Date.now()+60).toString();
-        var cookieString="";
-        for(var key in myCookies) {
-          cookieString = key+"="+myCookies[key]+";"+expireAttribute+";";
-          document.cookie=cookieString;
+        console.log(expireAttribute);
+        cookieString = (username+"="+username+"; expires="+expireAttribute) ;
+        document.cookie=cookieString;
         }
 
-      }
+
 
       if(username =='' || password ==''){
         console.log('empty value')
@@ -131,7 +130,7 @@
             }
               else {
               saveCookies();
-                location.href = "index2.html";
+                //location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
             }
