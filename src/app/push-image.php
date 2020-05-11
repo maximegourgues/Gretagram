@@ -18,10 +18,11 @@ if($conn->connect_error){
   die("Failed to connect".$conn->connect_error);
 }else{
   // header("Location: index.html?connectionsucces");
-  echo "Connection succes";
+  echo "Connection success";
 }
 
 $user_id = 1;
+echo $_POST['user_input'];
 
 //$user_id = $mysqli->real_escape_string($_REQUEST['user_id']);
 $nom_position = $_POST['myInput'];
