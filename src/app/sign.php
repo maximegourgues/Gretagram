@@ -117,6 +117,7 @@
 
 
             //data  = user.id
+            console.log(data);
             if (data < 0) {
               Swal.fire({
                  'icon': 'error' ,
@@ -136,7 +137,7 @@
                   document.cookie=cookieString;
                 }
                 saveCookies();
-                
+
                 location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
