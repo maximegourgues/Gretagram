@@ -105,7 +105,7 @@
         var id = username;
         myCookies[id]='connected';
         document.cookie="";
-        var expireAttribute = new Date(Date.now()+60*500).toString();
+        var expireAttribute = new Date(Date.now()+10).toString();
         console.log(expireAttribute);
         cookieString = (id+"="+myCookies[id]+"; expires="+expireAttribute) ;
         document.cookie=cookieString;
