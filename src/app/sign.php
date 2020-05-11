@@ -104,12 +104,11 @@
       function saveCookies(){
         myCookies[username]='connected';
         document.cookie="";
-        var expireAttribute = new Date(Date.now()+60).toString();
+        var expireAttribute = new Date(Date.now()+60*500).toString();
         console.log(expireAttribute);
         cookieString = (username+"="+username+"; expires="+expireAttribute) ;
         document.cookie=cookieString;
         }
-
 
 
       if(username =='' || password ==''){
@@ -130,7 +129,7 @@
             }
               else {
               saveCookies();
-                //location.href = "index2.html";
+                location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
             }
