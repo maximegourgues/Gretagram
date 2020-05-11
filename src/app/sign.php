@@ -130,7 +130,7 @@
             }
               else {
                 saveCookies();
-                //location.href = "index2.html";
+                location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
             }
