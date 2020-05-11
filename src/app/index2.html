@@ -86,6 +86,18 @@
 
     <style type="text/css">
 
+        .td5{
+          transition-duration: '0.5s';
+        }
+
+        .td1{
+          transition-duration: '1s';
+        }
+
+        *, ::after, ::before{
+          box-sizing:content-box;
+        }
+
         .leaflet-popup-content{
             color:black;
         }
@@ -146,10 +158,10 @@
     <div class="container-fluid " >
         <div class="container" >
           <div class="row flex-xl-nowrap">
-            <div class="col-12 col-md-3 col-xl-4 bd-sidebar">
+            <div class="col-12 col-md-3 col-xl-4 bd-sidebar" style="position:fixed;left:7%;">
               <header ng-include src="'templates/menu.html'"></header>
             </div>
-            <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
+            <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" style="left:10%;transition-duration:0.5s;"role="main">
               <div class=" col-md-auto col-xl-auto py-md-3">
                   <div class="row justify-content-center ">
                   <form class="form-label-group" id="chat">
@@ -159,7 +171,7 @@
                   </div>
                   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-                  <div id="content">
+                  <div id="content" class="hero">
                     <script type="text/javascript">
                       $user_id=1;
                         $.ajax({
@@ -188,7 +200,7 @@
         </div>
     </div>
 
-    <div id='map-container' class='three'>
+    <div id='map-container' class='three' style="position:fixed;right:1%;max-width:600px;">
             
         <div id="map" ></div>
         <input type='button' id='size' value='Reduce'>

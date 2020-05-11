@@ -109,16 +109,21 @@ text-align: center;
     display: block;
 }
 .cardbox .cardbox-item img{
+  display:block;
+  /*min-width: inherit;*/
+  width:100%;
 }
 .img-responsive{
     display: block;
     max-width: 100%;
+    
     height: auto;
 }	
 .fw {
     width: 100% !important;
 	height: auto;
 }
+
 
 
 /* ------------------------------- */

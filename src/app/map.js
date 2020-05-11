@@ -278,7 +278,7 @@ var geojsonLayer;
 			console.log(map.getCenter());
 			var currentPos = map.getCenter();
 			var currentZoom = map.getZoom();
-
+			var feed = document.querySelector('.modifmain');
 
 			if(bigMap){
 				
@@ -287,6 +287,11 @@ var geojsonLayer;
 
 				container.style.width='400px';
 				container.style.height='400px';
+
+				$('.map-container').removeClass('three');
+				$('.map-container').addClass('three-trans');
+
+				feed.style.left='20%';
 
 				map.setView(currentPos);
 
@@ -299,6 +304,11 @@ var geojsonLayer;
 				container.style.width='1000px';
 				container.style.height='800px';
 				
+				$('.map-container').removeClass('three-trans');
+				$('.map-container').addClass('three');
+
+				feed.style.left='10%';
+
 				map.setView(currentPos);
 
 				removeTendances();
