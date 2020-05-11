@@ -117,7 +117,7 @@
               })
             }
               else {
-              saveCookies();
+              saveCookies(username);
                 location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);

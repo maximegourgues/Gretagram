@@ -1,7 +1,6 @@
 var myCookies ={};
 
-function saveCookies(){
-  username = window.document.getElementById('username').value
+function saveCookies(name){
   myCookies[username]='connected';
   document.cookie="";
   var expireAttribute = new Date(Date.now()+60).toString();
