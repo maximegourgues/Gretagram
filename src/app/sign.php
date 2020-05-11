@@ -99,37 +99,44 @@
       var username = $("#inputUsername").val();
       var password = $("#inputPassword").val();
 
+
       var myCookies ={};
 
-      function saveCookies(){
-        var id = username;
-        myCookies[id]='connected';
-        document.cookie="";
-        var expireAttribute = new Date(Date.now()+60*500).toString();
-        console.log(expireAttribute);
-        cookieString = (id+"="+myCookies[id]+"; expires="+expireAttribute) ;
-        document.cookie=cookieString;
-        }
 
 
       if(username =='' || password ==''){
         console.log('empty value')
       }
       else {
+
         $.ajax({
           type:'POST',
           url:'php/login.php',
           data: {username : username, password : password},
           success: function(data){
-            if (data != 1) {
+
+
+            //data  = user.id
+            if (data < 0) {
               Swal.fire({
                  'icon': 'error' ,
                  'title': 'Login failed !',
-                 'text': data +'Unkown username or wrong password'
+                 'text': 'Unkown username or wrong password'
               })
             }
               else {
+
+                  function saveCookies(){
+                  var id = data;
+                  myCookies[id]='connected';
+                  document.cookie="";
+                  var expireAttribute = new Date(Date.now()+60*500).toString();
+                  console.log(expireAttribute);
+                  cookieString = (id+"="+myCookies[id]+"; expires="+expireAttribute) ;
+                  document.cookie=cookieString;
+                }
                 saveCookies();
+                
                 location.href = "index2.html";
                 var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
                 console.log(cookies);
