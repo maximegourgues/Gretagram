@@ -24,7 +24,6 @@ $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 
         $post='<!-- SIDEBAR USERPIC -->
-        <div class="col-lg-11 offset-lg-0">
             <div class="profile-userpic">
                 <img src="profile_pictures/unknown_user.png" class="img-responsive" alt="">
             </div>

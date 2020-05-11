@@ -131,7 +131,7 @@ while($row = mysqli_fetch_array($result)) {
             <div class="container">
               <div class="row">	
       
-                <div class="col-lg-11 offset-lg-0" >
+                <div class="col-lg-6 offset-lg-3">
       
                   <div class="cardbox shadow-lg bg-white">
         

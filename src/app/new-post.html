@@ -26,36 +26,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="js/cookies.js"></script> 
-
     <script type="text/javascript">
-        $(document).ready(function() {
 
-           //votre code ici
-           /*
-             L'utilisateur entre des phrases qui sont publiées
-             dans la fenêtre du chat.
-
-             Au clic sur une phrase, celle-ci est supprimée.
-           */
-
-           
-
-           });
-
-           
-
-          console.log(document.cookie);
-          
-          if (document.cookie=="" || document.cookie.length <= 36){
-            window.location.replace('sign.php');
-          }else{
-            var a = document.cookie.split(';');
-            //console.log(a);
-            var b = document.cookie.split('=');
-            var c = b[0];
-            console.log('Utilisateur:'+c);
-          }
 
     </script>
 
@@ -192,14 +164,14 @@
             <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
               <div class=" col-md-auto col-xl-auto py-md-3">
                     <div class="row justify-content-center ">
-                        <form action="push-image.php" class="form-label-group" id="new-post" autocomplete="off"  method="POST" enctype="multipart/form-data">
+                        <form class="form-label-group" id="new-post" autocomplete="off" action="push-image.php" method="POST" enctype="multipart/form-data">
                             <!--DESCRIPTION CONTAINER-->
                             <div>
                                 <textarea id="text-status" name="text-status" rows="7" cols="60" placeholder="Remplissez votre nouveau post ici"></textarea>
                             </div>
                             <!--UPLOAD FILE CONTAINER-->
                             <div class="custom-file">
-                                <input type="file" name="file" class="file" class="custom-file-input" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <input type="file" name="file" class="custom-file-input" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
                                 <label class="custom-file-label" for="fileElem">Select some files</label>
                             </div>
                             <!--SEARCH CONTAINER-->
@@ -207,11 +179,10 @@
                                     <input id="myInput" type="text" name="myInput" placeholder="Emplacement">
                                     <input id="lat_input" type="hidden" name="lat_input">
                                     <input id="lon_input" type="hidden" name="lon_input">
-                                    <input id="user_input" type="hidden" name="user_input">
                                 </div>
                             
                             
-                            <button type="submit" class="lol" name="submit" id="submit">UPLOAD</button>
+                            <button type="submit" name="submit" id="submit">UPLOAD</button>
                         </form>
                         <!--PREVIEW CONTAINER-->
                         <div id="preview-image">
@@ -239,25 +210,7 @@
         </div>
     </div>
     <script>
-
-        if (document.cookie=="" || document.cookie.length <= 36){
-            window.location.replace('sign.php');
-          }else{
-            var a = document.cookie.split(';');
-            //console.log(a);
-            var b = document.cookie.split('=');
-            var c = b[0];
-            console.log('Utilisateur:'+c);
-            document.getElementById('user_input').value=c;
-          }
-
         autocomplete(document.getElementById("myInput"));
-        console.log(document.cookies.split(';')[0]);
-
-        
-
-        
-
     </script> 
   </body>
 
