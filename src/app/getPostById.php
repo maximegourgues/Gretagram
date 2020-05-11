@@ -14,113 +14,76 @@ if($conn->connect_error){
   //echo "Connection successful</br>";
 }
 
-$user_id = $_POST['user_id'];
-$profile_id = $_POST['profile_id'];
-
-//echo "oui";
-
-
-function time_elapsed_string($datetime, $full = false) {
-  $now = new DateTime;
-  $ago = new DateTime($datetime);
-  $diff = $now->diff($ago);
-
-  $diff->w = floor($diff->d / 7);
-  $diff->d -= $diff->w * 7;
-
-  $string = array(
-      'y' => 'year',
-      'm' => 'month',
-      'w' => 'week',
-      'd' => 'day',
-      'h' => 'hour',
-      'i' => 'minute',
-      's' => 'second',
-  );
-  foreach ($string as $k => &$v) {
-      if ($diff->$k) {
-          $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-      } else {
-          unset($string[$k]);
-      }
-  }
-
-  if (!$full) $string = array_slice($string, 0, 1);
-  return $string ? implode(', ', $string) . ' ago' : 'just now';
-}
+$post_id = $_POST['post_id'];
 
 function timeAgo($time_ago){
-    $time_ago = strtotime($time_ago);
-    $cur_time   = time();
-    $time_elapsed   = $cur_time - $time_ago;
-    $seconds    = $time_elapsed ;
-    $minutes    = round($time_elapsed / 60 );
-    $hours      = round($time_elapsed / 3600);
-    $days       = round($time_elapsed / 86400 );
-    $weeks      = round($time_elapsed / 604800);
-    $months     = round($time_elapsed / 2600640 );
-    $years      = round($time_elapsed / 31207680 );
-    // Seconds
-    if($seconds <= 60){
-        return "A l'instant";
-    }
-    //Minutes
-    else if($minutes <=60){
-        if($minutes==1){
-            return "Il y a une minute";
-        }
-        else{
-            return "Il y a $minutes minutes";
-        }
-    }
-    //Hours
-    else if($hours <=24){
-        if($hours==1){
-            return "Il y a une heure";
-        }else{
-            return "Il y a $hours heures";
-        }
-    }
-    //Days
-    else if($days <= 7){
-        if($days==1){
-            return "Hier";
-        }else{
-            return "$days jours";
-        }
-    }
-    //Weeks
-    else if($weeks <= 4.3){
-        if($weeks==1){
-            return "La semaine dernière";
-        }else{
-            return "$weeks semaines";
-        }
-    }
-    //Months
-    else if($months <=12){
-        if($months==1){
-            return "Il y a un mois";
-        }else{
-            return "Il y a $months mois";
-        }
-    }
-    //Years
-    else{
-        /*if($years==1){
-            return "one year ago";
-        }else{*/
-            return "$years ans";
-        //}
-    }
+  $time_ago = strtotime($time_ago);
+  $cur_time   = time();
+  $time_elapsed   = $cur_time - $time_ago;
+  $seconds    = $time_elapsed ;
+  $minutes    = round($time_elapsed / 60 );
+  $hours      = round($time_elapsed / 3600);
+  $days       = round($time_elapsed / 86400 );
+  $weeks      = round($time_elapsed / 604800);
+  $months     = round($time_elapsed / 2600640 );
+  $years      = round($time_elapsed / 31207680 );
+  // Seconds
+  if($seconds <= 60){
+      return "A l'instant";
+  }
+  //Minutes
+  else if($minutes <=60){
+      if($minutes==1){
+          return "Il y a une minute";
+      }
+      else{
+          return "Il y a $minutes minutes";
+      }
+  }
+  //Hours
+  else if($hours <=24){
+      if($hours==1){
+          return "Il y a une heure";
+      }else{
+          return "Il y a $hours heures";
+      }
+  }
+  //Days
+  else if($days <= 7){
+      if($days==1){
+          return "Hier";
+      }else{
+          return "$days jours";
+      }
+  }
+  //Weeks
+  else if($weeks <= 4.3){
+      if($weeks==1){
+          return "La semaine dernière";
+      }else{
+          return "$weeks semaines";
+      }
+  }
+  //Months
+  else if($months <=12){
+      if($months==1){
+          return "Il y a un mois";
+      }else{
+          return "Il y a $months mois";
+      }
+  }
+  //Years
+  else{
+      /*if($years==1){
+          return "one year ago";
+      }else{*/
+          return "$years ans";
+      //}
+  }
 }
 
-//$user_id = 1;
-
-//$sql = "SELECT * FROM posts INNER JOIN users WHERE (users.id=posts.user_id) ORDER BY date_now DESC";
-//$sql = "SELECT DISTINCT users.id, users.avatar, users.fullname,posts.post_id, posts.user_id, posts.latitude, posts.longitude, posts.nom_position, posts.image_location, posts.contenu, posts.likes, posts.comment, posts.date_now FROM (followings INNER JOIN posts ON (followings.follow_id=posts.user_id) OR posts.user_id=1 ) INNER JOIN users ON posts.user_id=users.id WHERE(followings.user_id = 1) ORDER BY date_now DESC";
-$sql = "SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE user_id=$profile_id ORDER BY date_now DESC";
-$result = $conn->query($sql) or die ("Could not execute query");
+$sql = "SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE post_id=$post_id ORDER BY date_now DESC ";
+$result = mysqli_query($conn,$sql);
  
 while($row = mysqli_fetch_array($result)) {
     extract($row);
@@ -131,7 +94,7 @@ while($row = mysqli_fetch_array($result)) {
             <div class="container">
               <div class="row">	
       
-                <div class="col-lg-11 offset-lg-0" >
+                <div class="col-lg-10 offset-lg-0">
       
                   <div class="cardbox shadow-lg bg-white">
         
@@ -147,7 +110,7 @@ while($row = mysqli_fetch_array($result)) {
 			              </div><!--/ dropdown -->
 			              <div class="media m-0">
 			                <div class="d-flex mr-3">
-                       <a href="profile.html?profile='.$username.'"><img class="img-fluid rounded-circle" src="'.$avatar.'" alt="User"></a>
+                       <a href="profile.html?profile='.$row['username'].'"><img class="img-fluid rounded-circle" src="'.$avatar.'" alt="User"></a>
                       </div>
 			                <div class="media-body">
                         <p class="m-0">'.$fullname.'</p>
@@ -176,7 +139,7 @@ while($row = mysqli_fetch_array($result)) {
                       ';
                       
                       // determine if user has already liked this post
-                      $results1 = mysqli_query($conn, "SELECT * FROM likes WHERE user_id=$profile_id AND post_id=".$row['post_id']."");
+                      $results1 = mysqli_query($conn, "SELECT * FROM likes WHERE user_id=$user_id AND post_id=".$row['post_id']."");
 
                       if (mysqli_num_rows($results1) == 1 ){ 
                         $post.='<!-- user already likes post -->
@@ -193,11 +156,25 @@ while($row = mysqli_fetch_array($result)) {
                 $post.='</ul>			   
                   </div><!--/ cardbox-base -->
                   <div class="cardbox-comments ">';
-
                   $result2 = mysqli_query($conn,"SELECT comments.comment_id, comments.user_id, comments.post_id, comments.contenu, users.avatar, users.username FROM comments INNER JOIN users ON comments.user_id=users.id WHERE comments.post_id = ".$row['post_id']." ORDER BY comment_id");
-
+                 // $result2 = $conn->query($sql1) or die ("Could not execute query");
+                  //echo $post_id;
                   $post.='<table class="table'.$post_id.'">';
                   while($row2 = mysqli_fetch_array($result2)) {
+                    //echo $contenu;
+                    //echo "OUI";
+                    /*$post.='
+                    <ul>
+
+                      <li>
+                        <span class="comment-avatar float-left">
+                          <a href=""><img class="rounded-circle" src="'.$avatar.'" alt="..."></a>                            
+                        </span>
+                        <div class="search">
+                          <span>'.$contenu.'</span>
+                          <!--<button><i class="fa fa-camera"></i></button>-->
+                        </div><!--/. Search -->
+                      </li>';*/
                     $post.='<tr>
                     <td>
                               <span class="comment-avatar float-left">
@@ -213,6 +190,19 @@ while($row = mysqli_fetch_array($result)) {
                             </tr>
                             ';
                   }
+                 /* $post.='
+
+                      <li>
+                        <span class="comment-avatar float-left">
+                          <a href=""><img class="rounded-circle" src="'.'profile_pictures/unknown_user.png'.'" alt="..."></a>                            
+                        </span>
+                        <div class="search">
+                          <textarea id="text-status" name="text-status"  placeholder="Remplissez votre nouveau post ici"></textarea>
+                          <!--<input placeholder="Write a comment" type="text">-->
+                          <!--<button><i class="fa fa-camera"></i></button>-->
+                        </div><!--/. Search -->
+                      </li>
+                    </ul>*/
 
                   $post.='<tr class="commentspace'.$post_id.'">
                   <td>
@@ -245,9 +235,7 @@ while($row = mysqli_fetch_array($result)) {
               </div><!--/ row -->
             </div><!--/ container -->
          </section>';
-                  
-      echo $post;
-    
-    }
 
+        echo $post;
+                }
 ?>

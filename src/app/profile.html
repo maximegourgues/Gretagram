@@ -38,7 +38,17 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
+    <script src="js/cookie.js"></script>
+
+    <script type="text/javascript">
+
+
+    </script>
+
     <style type="text/css">
+    *, ::after, ::before{
+          box-sizing:content-box;
+        }
 
         .leaflet-popup-content{
             color:black;
@@ -202,10 +212,10 @@
         <div class="container-fluid ">
             <div class="container">
             <div class="row flex-xl-nowrap">
-                <div class="col-12 col-md-3 col-xl-4 bd-sidebar">
+                <div class="col-12 col-md-3 col-xl-4 bd-sidebar" style="position:fixed;left:7%;">
                 <header ng-include src="'templates/menu.html'"></header>
                 </div>
-                <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" role="main">
+                <main class="col-12 col-md-7 col-xl-8 py-md-3 bd-content modifmain" style="left:30%;transition-duration:0.5s;" role="main">
                 <div class=" col-md-auto col-xl-auto py-md-3">
                     
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -214,7 +224,7 @@
                         <div class="row profile">
                             <div class="col-md-3">
                                 <!--MODIFIER CELUI LA POUR QU'IL PRENNE TOUTE LA PLACE-->
-                                <div class="profile-sidebar">
+                                <div class="profile-sidebar" style="left:150%;">
                                     
                                 </div>
                             </br>
@@ -231,7 +241,7 @@
                                     font-size: 1.3em;
                                 }
                             </style>
-                                <div class="profile-content" style="width:700px;">
+                                <div class="profile-content" style="width:700px;background-color:inherit;">
                                     <script>
                                         function feed_user(user_id,profile_id){
                                             
@@ -263,7 +273,6 @@
                                         const urlParams = new URLSearchParams(window.location.search);
                                         const profile = urlParams.get('profile');
                                         console.log(profile);
-<<<<<<< HEAD
 
                                         
                                         if (document.cookie=="" || document.cookie.length <= 36){
@@ -278,12 +287,8 @@
 
                                         if (profile==""){
                                             window.location.replace('404.html');
-=======
-                                        /*if (profile!=""){
-                                            //REDIRECT 404 
->>>>>>> parent of daf2613... Merge branch 'master' of https://github.com/maximegourgues/Gretagram
                                             console.log("fail");
-                                        }else{*/
+                                        }else{
                                             //console.log(profile)
                                             $.ajax({
                                             url: 'usernameToId.php',
@@ -294,23 +299,15 @@
                                                 success: function(response){
                                                     $profile_id=response;
                                                     //console.log(profile_id);
-<<<<<<< HEAD
                                                     feed_user(c,$profile_id);
-=======
-                                                    feed_user(2,$profile_id);
->>>>>>> parent of daf2613... Merge branch 'master' of https://github.com/maximegourgues/Gretagram
                                                 },error:function(response){
                                                     console.log(response)
                                                     console.log("error ajax");
                                                 }
                                             });
                                             
-<<<<<<< HEAD
                                         }
                                     }
-=======
-                                       // }
->>>>>>> parent of daf2613... Merge branch 'master' of https://github.com/maximegourgues/Gretagram
 
                                     </script>
                                  </div>
