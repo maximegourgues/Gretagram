@@ -90,12 +90,15 @@
 
   <script type="text/javascript" src='js/sign.js'></script>
   <!-- login script -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+  <script src="js/cookies.js"></script>
   <script type="text/javascript">
 
   $(function(){
     $("#login").click(function() {
       var username = $("#inputUsername").val();
       var password = $("#inputPassword").val();
+
 
       if(username =='' || password ==''){
         console.log('empty value')
@@ -114,8 +117,10 @@
               })
             }
               else {
+              saveCookies();
                 location.href = "index2.html";
-                console.log ('gg gros');
+                var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
+                console.log(cookies);
             }
           },
           error: function(data){

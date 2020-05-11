@@ -1,5 +1,7 @@
 <?php
   include 'db.inc.php';
+  session_start();
+
 
   if(isset($_POST)){
 
@@ -10,6 +12,7 @@
       $stmt = $conn->prepare($sql);
       $stmt -> bind_param("ss", $username,$password);
       $res = $stmt->execute();
+
       if($res) {
         echo 1;
       }
