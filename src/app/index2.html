@@ -228,18 +228,19 @@
 
                   <div id="content" style="margin-top:20px;">
                     <script type="text/javascript">
-                      $user_id=1;
-                        $.ajax({
-                          url: 'feed.php',
-                          type: 'post',
-                          data: {
-                              'user_id': $user_id
-                          },
-                              success: function(response){
-                                //console.log(response);
-                              $('#content').append(response);
-                              }
-                          });
+                    console.log("oui");
+                    if (document.cookie=="" || document.cookie.length <= 36){
+                      window.location.replace('sign.php');
+                    }else{
+                      var a = document.cookie.split(';');
+                      //console.log(a);
+                      var b = document.cookie.split('=');
+                      var c = b[0];
+                      console.log('Utilisateur:'+c);
+                    
+                      $user_id=c;
+                        
+                        }
                       //$('#content').load('feed.php');
                       //$('#content').load('feedForUser.php');
                       //$('#content').load('post-section.html');
@@ -280,7 +281,7 @@
     </style>
     <script>
 
-          if (document.cookie=="" || document.cookie.length <= 36){
+        if (document.cookie=="" || document.cookie.length <= 36){
             window.location.replace('sign.php');
           }else{
             var a = document.cookie.split(';');
@@ -288,7 +289,26 @@
             var b = document.cookie.split('=');
             var c = b[0];
             console.log('Utilisateur:'+c);
-          }
+          $user_id=c;
+
+      function loadFeed(){
+          $.ajax({
+                          url: 'feed.php',
+                          type: 'post',
+                          data: {
+                              'user_id': $user_id
+                          },
+                              success: function(response){
+                                console.log(response);
+                                $('#content').empty();
+                              $('#content').append(response);
+                              },error:function(){
+                                console.log("error");
+                              }
+                          });
+                        }
+
+      loadFeed();
 
       function uploadComment(id){
         console.log("Upload d'un commentaire sur le post: "+id);
@@ -303,7 +323,7 @@
           data: {
             'postid': id,
             'contenu': $comment_content,
-            'userid' : 1 //DEFINIR ICI LE USER ID
+            'userid' : $user_id //DEFINIR ICI LE USER ID
           },
             success: function(response){
               //console.log(response);
@@ -316,6 +336,7 @@
                 $('.table'+id+':last-child:last-child').prepend("<tr> <td><span class='comment-avatar float-left'><a href=''><img class='rounded-circle' src='"+$tab[1]+"' alt='...'></a></span></td></tr><tr><td><div class='search'>"
                   +"<label>"+$comment_content+"</label></div><!--/. Search --></td></tr>");
               }
+              loadFeed();
             }
         });
       }
@@ -349,7 +370,7 @@
           data: {
             'liked': 1,
             'postid': postid,
-            'userid' : 1
+            'userid' : $user_id
           },
             success: function(response){
               $('#'+postid+'.likes_count').text(response);
@@ -370,7 +391,7 @@
           data: {
             'unliked': 1,
             'postid': postid,
-            'userid' : 1
+            'userid' : $user_id
           },
             success: function(response){
               /*if(response==0){
@@ -383,11 +404,13 @@
           }
         });
       }
-
+    }
     </script>
     
     <script>
+      $(document).ready(function(){
       autocomplete(document.getElementById("myInput"));
+      });
     </script> 
 
   </body>

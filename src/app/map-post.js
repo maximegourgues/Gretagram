@@ -128,6 +128,7 @@ function updateImputPosition(lat,lon){
 		//console.log(e.target.classList);
 		//if(e.target.childNodes.length>0 && !(e.target.lastChild.classList.contains('clickable-item'))){
 		updateImputPosition(lat,lon);
+		clickedItem(e);
 		//}
 	//Add a marker to show where you clicked.
 	   //Note: if lat/lon are strings then use parseFloat(lat), parseFloat(lon)
@@ -378,7 +379,7 @@ function updateImputPosition(lat,lon){
 			/*execute a function when someone clicks in the document:*/
 
 			document.addEventListener("click", function (e) {
-				clickedItem(e.target);
+				//clickedItem(e.target);
 				closeAllLists(e.target);
 			});
 		
@@ -388,19 +389,27 @@ function updateImputPosition(lat,lon){
 function clickedItem(element){
 	//console.log(tableau);
 	var item = element.lastChild;
+	console.log('clickedItem');
 	if(item!=null && item.classList.contains("clickable-item") ){
-		console.log(item.id);
+		alert(item.id);
 		var coords = (item.id).split(",");
 		var a = coords[0];
 		var b = coords[1];
+		alert(a);
+		alert(b);
 		SelectPoints(a,b);
 		map.setView([a,b]);
 		var c = [a,b];
 		/*$('#myInput').data('coords',c);
 		console.log($('#myInput').data('coords'));*/
-		document.getElementById('lat_input').value=location.lat;
-		document.getElementById('lon_input').value=location.lng;
+		$('#lat_input').val(a);
+		$('#lon_input').val(b);
+		console.log("Location: "+location);
 		//console.log(document.getElementById('coords_input').value);
+	}else{
+		//console.log(element.latlng);
+		$('#lat_input').val(element.latlng.lat);
+		$('#lon_input').val(element.latlng.lng);
 	}
 }
 

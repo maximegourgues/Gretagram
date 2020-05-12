@@ -22,7 +22,9 @@ $result = mysqli_query($conn,$sql);
 $myobj = '{"type": "FeatureCollection","generator":"overpass-turbo","timestamp": "2015-08-08T19:03:02Z","features": [';
     while($row =mysqli_fetch_assoc($result))
     {
+      if(isset($row['longitude'])){
         $myobj.='{"type":"Feature","properties":{"post_id":"'.$row['post_id'].'"},"geometry":{"type": "Point","coordinates": ['.$row['longitude'].','.$row['latitude'].']}},';
+      }
     }
     $myobj.='{"type":"Feature","properties":{"post_id":"0"},"geometry":{"type":"Point","coordinates":[0,0]}}]}';
 
