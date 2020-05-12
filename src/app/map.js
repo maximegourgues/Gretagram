@@ -166,6 +166,31 @@ var geojsonLayer;
 		}).addTo(map);
 
 
+		var add ='';
+		$('#content').empty();
+		$.each(selPts,function(index,value){
+			
+			$post_id=(value.properties.post_id);
+			$.ajax({
+				url: 'getPostById.php',
+				type: 'post',
+				data: {
+					'post_id': $post_id
+				},
+					success: function(response){
+						console.log("response: "+response);
+						add+=response;
+						$('#content').prepend(response);
+						//console.log(response);
+						
+						
+				}
+			});
+		})
+		//console.log(add);
+		//$('#content').empty();
+		//$('#content').val(add);
+
 
 		//Symbolize the Selected Points
 			 geojsonLayer = L.geoJson(selPts, {
