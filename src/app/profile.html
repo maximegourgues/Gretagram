@@ -338,6 +338,11 @@
         </div>
         <script>
 
+
+            $(document).ready(function(){
+                
+
+
             function follow(user_id,profile_id){
                 console.log("follow");
                 $newButton = '<button type="button" onclick="unfollow('+user_id+','+profile_id+')" class="btn /*btn-success*/ btn-sm" style="background-color:lightblue;">Suivi</button><button type="button" class="btn btn-danger btn-sm">Message</button>';
@@ -382,6 +387,24 @@
             var b = document.cookie.split('=');
             var c = b[0];
             //console.log('Utilisateur:'+c);            
+            $user_id=c;
+
+            $.ajax({
+                    url: 'idToUsername.php',
+                    type: 'post',
+                    data: {
+                        'user_id': $user_id
+                    },
+                        success: function(response){
+                        //console.log("changemenu");
+                        //console.log($('#profile-button'));
+                        $('#home-button').attr("href", 'index2.html');
+                        $('#profile-button').attr("href", 'profile.html?profile='+response);
+                    },error: function(response){console.log(response)}
+                    });
+            
+
+
 
             function uploadComment(id){
               console.log("Upload d'un commentaire sur le post: "+id);
@@ -475,7 +498,7 @@
                     $('#'+postid+'.like').removeClass('hide');
                 }
               });
-            }
+            }})
       
           </script>
     </body>

@@ -239,7 +239,7 @@
         </div>
     </div>
     <script>
-
+        $(document).ready(function(){
         if (document.cookie=="" || document.cookie.length <= 36){
             window.location.replace('sign.php');
           }else{
@@ -249,12 +249,28 @@
             var c = b[0];
             console.log('Utilisateur:'+c);
             document.getElementById('user_input').value=c;
+
+            $user_id=c;
+
+            $.ajax({
+                    url: 'idToUsername.php',
+                    type: 'post',
+                    data: {
+                        'user_id': $user_id
+                    },
+                        success: function(response){
+                        //console.log("changemenu");
+                        //console.log($('#profile-button'));
+                        $('#home-button').attr("href", 'index2.html');
+                        $('#profile-button').attr("href", 'profile.html?profile='+response);
+                    },error: function(response){console.log(response)}
+                    });
           }
 
         autocomplete(document.getElementById("myInput"));
         console.log(document.cookies.split(';')[0]);
 
-        
+        })
 
         
 
