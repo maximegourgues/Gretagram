@@ -9,9 +9,14 @@
 }
 
 function deleteACookie(){
-    var cname = window.document.getElementById('username').value;//Get the cookie name from the cname input element
+
+  for(var i=0 ; i < 1000; i++  ) {
+    var cname = i;//Get the cookie name from the cname input element
     deleteCookie(cname);//Call the deleteCookie to delete the cookie
-    window.location.reload();//Reload the page
+
+  }
+    //Reload the page
+    window.location.reload();
 }
 
 function getCookie(cname) {

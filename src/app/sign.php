@@ -122,18 +122,19 @@
             }
               else {
                         function saveCookies(){
-                        var id = username;
+                        var id = data;
                         myCookies[id]='connected';
                         document.cookie="";
-                        var expireAttribute = new Date(Date.now()+60).toString();
+                        var expireAttribute = new Date(Date.now()+60*1000).toString();
 
-                        cookieString = (id+"="+myCookies[id]+"; expires="+expireAttribute) ;
+                        cookieString = id+"="+myCookies[id]+"; expires="+expireAttribute ;
                         document.cookie=cookieString;
                         }
 
                         saveCookies();
                         location.href = "index2.html";
                         var cookies = document.cookie.split(';').map(cookie => cookie.split('='))
+                        console.log(cookies)
 
             }
           },
