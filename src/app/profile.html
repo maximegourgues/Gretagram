@@ -483,7 +483,6 @@
             var c = b[0];
             //console.log('Utilisateur:'+c);            
             $user_id=c;
-
             $.ajax({
                     url: 'idToUsername.php',
                     type: 'post',
@@ -494,11 +493,13 @@
                         //console.log("changemenu");
                         //console.log($('#profile-button'));
                         $('#home-button').attr("href", 'index2.html');
+                        $('#newPost').attr("href", 'new-post.html');
                         $('#profile-button').attr("href", 'profile.html?profile='+response);
                     },error: function(response){console.log(response)}
                     });
 
            })
+            
       
           </script>
     </body>

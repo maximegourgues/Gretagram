@@ -135,6 +135,18 @@ var geojsonLayer;
 
 });
 
+function clearwaypoint(){
+	if (theCircle != undefined) {
+		map.removeLayer(theCircle);
+	  };
+	  if (theMarker != undefined) {
+			map.removeLayer(theMarker);
+	  };
+	  if (geojsonLayer != undefined) {
+			map.removeLayer(geojsonLayer);
+	  };
+}
+
 	var selPts = [];
 	dist = 150;  // 150 miles,
 
@@ -473,6 +485,7 @@ var geojsonLayer;
 			} else if (e.keyCode == 13) {
 			/*If the ENTER key is pressed, prevent the form from being submitted,*/
 			e.preventDefault();
+			clearwaypoint();
 			clickedItem(e);
 			if (currentFocus > -1) {
 				/*and simulate a click on the "active" item:*/
@@ -509,6 +522,7 @@ var geojsonLayer;
 		/*execute a function when someone clicks in the document:*/
 
 		document.addEventListener("click", function (e) {
+			//clearwaypoint();
 			clickedItem(e.target);
 			closeAllLists(e.target);
 		});

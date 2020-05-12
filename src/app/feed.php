@@ -173,13 +173,16 @@ while($row = mysqli_fetch_array($result)) {
                       
                       // determine if user has already liked this post
                       $results1 = mysqli_query($conn, "SELECT * FROM likes WHERE user_id=$user_id AND post_id=".$row['post_id']."");
-
-                      if (mysqli_num_rows($results1) == 1 ){ 
+                      $bo=true;
+                      while($row1 = mysqli_fetch_array($results1)){ 
+                        if(($row1['user_id'])!='undefined'){
                         $post.='<!-- user already likes post -->
                         <li><a><i id="'.$post_id.'" onclick="unlike('.$post_id.')" class="unlike fa fa-thumbs-up" data-id="'.$row['id'].'"></i> </a></li>
                         <li><a><i id="'.$post_id.'" onclick="like('.$post_id.')" class="like hide fa fa-thumbs-o-up" data-id="'.$row['id'].'"></i></a></li> ';
+                        $bo=false;
+                        $post.=$row1['user_id'];}
                       }
-                      else{
+                      if($bo){
                         $post.='<!-- user has not yet liked post -->
                         <li><a><i id="'.$post_id.'" onclick="like('.$post_id.')" class="like fa fa-thumbs-o-up" data-id="'.$row['id'].'"></i> </a></li>
                         <li><a><i id="'.$post_id.'" onclick="unlike('.$post_id.')" class="unlike hide fa fa-thumbs-up" data-id="'.$row['id'].'"></i></a></li> ';

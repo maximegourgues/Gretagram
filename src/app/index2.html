@@ -280,6 +280,7 @@
         }
     </style>
     <script>
+      $user_id=1;
 $(document).ready(function(){
         if (document.cookie=="" || document.cookie.length <= 36){
             window.location.replace('sign.php');
@@ -290,8 +291,31 @@ $(document).ready(function(){
             var c = b[0];
             console.log('Utilisateur:'+c);
           $user_id=c;
+          }
 
-      function loadFeed(){
+          loadFeed();
+
+     
+
+          $.ajax({
+          url: 'idToUsername.php',
+          type: 'post',
+          data: {
+            'user_id': $user_id
+          },
+            success: function(response){
+              //console.log("changemenu");
+              //console.log($('#profile-button'));
+              $('#home-button').attr("href", 'index2.html');
+              $('#newPost').attr("href", 'new-post.html');
+              $('#profile-button').attr("href", 'profile.html?profile='+response);
+          },error: function(response){console.log(response)}
+        });
+
+
+          });
+      
+          function loadFeed(){
           $.ajax({
                           url: 'feed.php',
                           type: 'post',
@@ -308,7 +332,6 @@ $(document).ready(function(){
                           });
                         }
 
-      loadFeed();
 
       function uploadComment(id){
         console.log("Upload d'un commentaire sur le post: "+id);
@@ -408,22 +431,9 @@ $(document).ready(function(){
     
       
       autocomplete(document.getElementById("myInput"));
-//console.log($user_id);
-      $.ajax({
-          url: 'idToUsername.php',
-          type: 'post',
-          data: {
-            'user_id': $user_id
-          },
-            success: function(response){
-              //console.log("changemenu");
-              //console.log($('#profile-button'));
-              $('#home-button').attr("href", 'index2.html');
-              $('#profile-button').attr("href", 'profile.html?profile='+response);
-          },error: function(response){console.log(response)}
-        });
-      }
-      });
+      //console.log($user_id);
+      
+     
     </script> 
 
   </body>

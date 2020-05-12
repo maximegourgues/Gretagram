@@ -68,7 +68,7 @@ if($conn->query($sql) === true){
 $conn->close();
 echo "Connection closed";
 
-//header('Location: index2.html');
+header('Location: index2.html');
 
 ?>
 
